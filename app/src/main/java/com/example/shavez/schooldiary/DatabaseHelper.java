@@ -46,10 +46,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(" create table "+ TABLE_BENUTZER + "(ID Integer Primary Key Autoincrement, Vorname Text, Nachname Text, Email Text, Passwort Text)");
-        sqLiteDatabase.execSQL(" create table "+ TABLE_BEWERTUNG + "(ID Integer Primary Key Autoincrement, Note Integer, Beschreibung Text, Datum Date)");
-        sqLiteDatabase.execSQL(" create table "+ TABLE_FACH + "(ID Integer Primary Key Autoincrement, Name Text, Beschreibung Text, Durchschnittsnote Integer)");
-        sqLiteDatabase.execSQL(" create table "+ TABLE_TERMIN + "(ID Integer Primary Key Autoincrement, Titel Text, Beschreibung Text, Datum Date)");
+
+        sqLiteDatabase.execSQL(" create table "+ TABLE_BENUTZER + "(Benutzer_ID Integer Primary Key Autoincrement, Vorname Text, Nachname Text, Email Text, Passwort Text)");
+        sqLiteDatabase.execSQL(" create table "+ TABLE_FACH + "(ID Integer Primary Key Autoincrement, Name Text, Beschreibung Text, Durchschnittsnote Integer, Benutzer_ID Integer,FOREIGN KEY (Benutzer_ID) REFERENCES " + TABLE_BENUTZER +("+Benutzer_ID+"));
+        sqLiteDatabase.execSQL(" create table "+ TABLE_BEWERTUNG + "(ID Integer Primary Key Autoincrement, Note Integer, Beschreibung Text, Datum Date, Fach_ID Integer,FOREIGN KEY (Fach_ID) REFERENCES " + TABLE_FACH +("+Fach_ID+"));
+        sqLiteDatabase.execSQL(" create table "+ TABLE_TERMIN + "(ID Integer Primary Key Autoincrement, Titel Text, Beschreibung Text, Datum Date, Benutzer_ID Integer,FOREIGN KEY (Benutzer_ID) REFERENCES " + TABLE_BENUTZER +("+Benutzer_ID+"));
 
     }
 
@@ -59,6 +60,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_BEWERTUNG);
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_FACH);
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_TERMIN);
-        onCreate(sqLiteDatabase); // s
+        onCreate(sqLiteDatabase);
     }
 }
