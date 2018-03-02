@@ -59,6 +59,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_BEWERTUNG);
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_FACH);
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_TERMIN);
-        onCreate(sqLiteDatabase);
+        onCreate(sqLiteDatabase); // s
     }
 }
