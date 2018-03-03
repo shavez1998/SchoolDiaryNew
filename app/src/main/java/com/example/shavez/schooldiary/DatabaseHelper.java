@@ -1,8 +1,11 @@
 package com.example.shavez.schooldiary;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by ateeq on 02/03/2018.
@@ -40,18 +43,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_NOTE = "Note";
     public static final String COL_BESCHREIBUNG_DATE = "Datum";
 
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null,DATABASE_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
-        sqLiteDatabase.execSQL(" create table "+ TABLE_BENUTZER + "(Benutzer_ID Integer Primary Key Autoincrement, Vorname Text, Nachname Text, Email Text, Passwort Text)");
-        sqLiteDatabase.execSQL(" create table "+ TABLE_FACH + "(ID Integer Primary Key Autoincrement, Name Text, Beschreibung Text, Durchschnittsnote Integer, Benutzer_ID Integer,FOREIGN KEY (Benutzer_ID) REFERENCES " + TABLE_BENUTZER +("+Benutzer_ID+"));
-        sqLiteDatabase.execSQL(" create table "+ TABLE_BEWERTUNG + "(ID Integer Primary Key Autoincrement, Note Integer, Beschreibung Text, Datum Date, Fach_ID Integer,FOREIGN KEY (Fach_ID) REFERENCES " + TABLE_FACH +("+Fach_ID+"));
-        sqLiteDatabase.execSQL(" create table "+ TABLE_TERMIN + "(ID Integer Primary Key Autoincrement, Titel Text, Beschreibung Text, Datum Date, Benutzer_ID Integer,FOREIGN KEY (Benutzer_ID) REFERENCES " + TABLE_BENUTZER +("+Benutzer_ID+"));
-
+        try {
+            sqLiteDatabase.execSQL(" create table " + TABLE_BENUTZER + "(ID Integer Primary Key Autoincrement, Vorname Text, Nachname Text, Email Text, Passwort Text)");
+            sqLiteDatabase.execSQL(" create table " + TABLE_FACH + "(ID Integer Primary Key Autoincrement, Name Text, Beschreibung Text, Durchschnittsnote Integer, Benutzer_ID Integer,FOREIGN KEY (Benutzer_ID) REFERENCES " + TABLE_BENUTZER + ("+Benutzer_ID+"));
+            sqLiteDatabase.execSQL(" create table " + TABLE_BEWERTUNG + "(ID Integer Primary Key Autoincrement, Note Integer, Beschreibung Text, Datum Date, Fach_ID Integer,FOREIGN KEY (Fach_ID) REFERENCES " + TABLE_FACH + ("+Fach_ID+"));
+            sqLiteDatabase.execSQL(" create table " + TABLE_TERMIN + "(ID Integer Primary Key Autoincrement, Titel Text, Beschreibung Text, Datum Date, Benutzer_ID Integer,FOREIGN KEY (Benutzer_ID) REFERENCES " + TABLE_BENUTZER + ("+Benutzer_ID+"));
+        } catch(Exception e){
+            Log.e("CREATE DATABACE", "CANT CREATE DATABACE");
+        }
     }
 
     @Override
@@ -62,4 +68,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_TERMIN);
         onCreate(sqLiteDatabase);
     }
+
 }
