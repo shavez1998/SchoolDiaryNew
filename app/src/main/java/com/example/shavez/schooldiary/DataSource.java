@@ -37,9 +37,8 @@ public class DataSource {
         return true;
     }
     public Cursor getDataBenutzer(){
-        Cursor c = database.rawQuery("SELECT * FROM "+ DatabaseHelper.TABLE_BENUTZER, null);
-        Toast.makeText(context,"!! " + c.getColumnName(0)+"!! " + "!! " + c.getColumnName(2), Toast.LENGTH_LONG).show();
-        return c;
+        return database.rawQuery("SELECT * FROM "+ DatabaseHelper.TABLE_BENUTZER, null);
+
     }
 
 }

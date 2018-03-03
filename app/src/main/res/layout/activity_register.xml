@@ -9,12 +9,12 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="250px"
-        android:layout_height="300px"
+        android:layout_width="200px"
+        android:layout_height="250px"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="0dp"
         app:srcCompat="@mipmap/menu_icon" />
 
     <TextView
@@ -22,14 +22,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageView2"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/imageView2"
         android:fontFamily="casual"
         android:text="School"
         android:textAllCaps="false"
         android:textColor="#0000ff"
-        android:textSize="45sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:typeface="sans" />
 
@@ -41,66 +41,76 @@
         android:layout_marginTop="-20dp"
         android:fontFamily="casual"
         android:text="Diary"
-        android:textSize="35sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:layout_below="@+id/textView3"
         android:layout_alignStart="@+id/textView3" />
-
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/r_vorname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
-        android:ems="11"
+        android:ems="10"
+        android:hint="Vorname"
+        android:inputType="textPersonName"
+        android:textSize="25sp" />
+    <EditText
+        android:id="@+id/r_nachname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r_vorname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Nachname"
+        android:inputType="textPersonName"
+        android:textSize="25sp" />
+    <EditText
+        android:id="@+id/r_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r_nachname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
         android:textSize="25sp" />
 
     <EditText
-        android:id="@+id/passwort"
+        android:id="@+id/r_passwort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/email"
-        android:layout_below="@+id/email"
+        android:layout_alignEnd="@+id/r_email"
+        android:layout_below="@+id/r_email"
         android:layout_marginTop="14dp"
-        android:ems="11"
+        android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="25sp" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/r_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/passwort"
-        android:layout_alignEnd="@+id/passwort"
-        android:layout_marginTop="80dp"
-        android:text="Login"
-        android:textSize="25sp"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/passwort"
-        android:layout_below="@+id/passwort"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="12dp"
-        android:text="Password forgot?"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwort"
-        android:layout_alignStart="@+id/passwort"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="0dp"
+        android:layout_below="@+id/r_passwort"
+        android:layout_alignEnd="@+id/r_passwort"
+        android:layout_marginTop="30dp"
         android:text="Register"
         android:textSize="25sp"/>
 
-</RelativeLayout>
 
+    <Button
+        android:id="@+id/r_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r_passwort"
+        android:layout_alignStart="@+id/r_passwort"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="0dp"
+        android:text="Cancel"
+        android:textSize="25sp"/>
+
+</RelativeLayout>

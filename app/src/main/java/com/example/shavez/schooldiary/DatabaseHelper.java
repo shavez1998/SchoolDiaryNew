@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(" create table " + TABLE_BEWERTUNG + "(ID Integer Primary Key Autoincrement, Note Integer, Beschreibung Text, Datum Date, Fach_ID Integer,FOREIGN KEY (Fach_ID) REFERENCES " + TABLE_FACH + ("Fach_ID"));
             sqLiteDatabase.execSQL(" create table " + TABLE_TERMIN + "(ID Integer Primary Key Autoincrement, Titel Text, Beschreibung Text, Datum Text, Benutzer_ID Integer,FOREIGN KEY (Benutzer_ID) REFERENCES " + TABLE_BENUTZER + ("ID"));
         } catch(Exception e){
-            Log.e("CREATE DATABACE", "CANT CREATE DATABACE");
+
         }
     }
 
