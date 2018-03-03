@@ -9,7 +9,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toast.makeText(this,"Hallo  SCHOOL PROJECT",Toast.LENGTH_LONG).show();
+        setContentView(R.layout.activity_menu);
+        Toast.makeText(this,"HALLO SCHOOL PROJECT",Toast.LENGTH_LONG).show();
     }
 }
