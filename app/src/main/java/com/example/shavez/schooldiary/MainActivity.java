@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         dataSource = new DataSource(this);
 
         login = (Button) findViewById(R.id.login);
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dataSource.open();
-                Intent i = new Intent(MainActivity.this, Register.class);
+                Intent i = new Intent(MainActivity.this, Faecher.class);
                 startActivity(i);
             }
         });
@@ -68,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         int idIndex = cursor.getColumnIndex(DatabaseHelper.COL_ID_BENUTZER);
         int vornameIndex = cursor.getColumnIndex(DatabaseHelper.COL_VORNAME);
         int nachnameIndex = cursor.getColumnIndex(DatabaseHelper.COL_NACHNAME);
-        int emailIndex = cursor.getColumnIndex(DatabaseHelper.COL_EMAIL);
-        int passwortIndex = cursor.getColumnIndex(DatabaseHelper.COL_PASSWORT);
+        //int emailIndex = cursor.getColumnIndex(DatabaseHelper.COL_EMAIL);
+        //int passwortIndex = cursor.getColumnIndex(DatabaseHelper.COL_PASSWORT);
 
         if (cursor.getCount() == 0) {
             showMessage("ERROR", "No Data found");
@@ -81,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
             while (cursor.moveToNext()) {
                 try {
-                    if (emailText.getText().toString().equals(cursor.getString(emailIndex)) && passwortText.getText().toString().equals(cursor.getString(passwortIndex)))
+                    //if (emailText.getText().toString().equals(cursor.getString(emailIndex)) && passwortText.getText().toString().equals(cursor.getString(passwortIndex)))
                         login = true;
                 } catch (Exception e){}
                 buffer.append("Id : " + cursor.getString(idIndex) + "\n");
                 buffer.append("Name : " + cursor.getString(vornameIndex) + "\n");
                 buffer.append("Surname : " + cursor.getString(nachnameIndex) + "\n");
-                buffer.append("Email : " + cursor.getString(emailIndex) + "\n");
-                buffer.append("Passwort : " + cursor.getString(passwortIndex) + "\n\n");
+                //buffer.append("Email : " + cursor.getString(emailIndex) + "\n");
+                //buffer.append("Passwort : " + cursor.getString(passwortIndex) + "\n\n");
 
             }
             if(login)

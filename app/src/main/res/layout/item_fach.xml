@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/fach_foto"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="8dp"
+        android:background="@android:color/holo_green_light" />
+
+    <TextView
+        android:id="@+id/fach_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_toRightOf="@id/fach_foto"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/fach_beschreibung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fach_name"
+
+        android:layout_marginTop="-3dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/fach_foto"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/dnote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fach_beschreibung"
+        android:layout_alignStart="@+id/fach_foto"
+        android:text="5,3"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/infoBox"
+        android:layout_width="35dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/fach_name"
+        android:layout_marginEnd="21dp"
+        app:srcCompat="@drawable/menu_dots_foreground" />
+
+
+</RelativeLayout>

@@ -22,13 +22,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_NACHNAME = "Nachname";
     public static final String COL_FK_FRAGE = "ID_Frage";
     public static final String COL_Antwort = "Antwort";
-    public static final String COL_FK_LOGIN = "ID_Login";
-
-    //login tabelle
-    public static final String TABLE_LOGIN = "Login";
-    public static final String COL_ID_LOGIN = "ID";
     public static final String COL_EMAIL_LOGIN = "Email";
     public static final String COL_PASSWORT_LOGIN = "Passwort";
+
+    //Zwischen Tabelle
+    public static  final String COL_DURCHSCHNITTSNOTE = "Durchschnitt_Note";
+
+
 
     //Fach tabelle
     public static final String TABLE_FACH = "fach";
@@ -70,39 +70,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
             String table1= " create table " + TABLE_BENUTZER + "("+COL_ID_BENUTZER +  " Integer Primary Key Autoincrement, "+
-                    COL_VORNAME + " Text, "+ COL_NACHNAME + " Text, "+ COL_Antwort + " Text, "+ COL_FK_FRAGE +
-                    " Integer, FOREIGN KEY (" + COL_FK_FRAGE + ") REFERENCES " + TABLE_FRAGEN + "(" + COL_ID_FRAGEN + "), "+
-                    COL_FK_LOGIN+"Integer FOREIGN KEY ("+COL_FK_LOGIN+") REFERENCES " + TABLE_LOGIN +"("+COL_ID_LOGIN+"))";
+                    COL_VORNAME + " Text, "+
+                    COL_NACHNAME + " Text, "+
+                    COL_Antwort + " Text, "+
+                    COL_EMAIL_LOGIN + " Text, "+
+                    COL_PASSWORT_LOGIN + " Text, "+
+                    COL_FK_FRAGE +" Integer, FOREIGN KEY (" + COL_FK_FRAGE + ") REFERENCES " + TABLE_FRAGEN + "(" + COL_ID_FRAGEN + "))";
             sqLiteDatabase.execSQL(table1);
-
-            String table2= " create table " + TABLE_LOGIN + "("+COL_ID_LOGIN +  " Integer Primary Key Autoincrement, "+
-                    COL_VORNAME + " Text, "+ COL_EMAIL_LOGIN + " Text, "+ COL_PASSWORT_LOGIN + " Text)";
-            sqLiteDatabase.execSQL(table2);
 
             String table3= " create table " + TABLE_FACH + "("+COL_ID_FACH +  " Integer Primary Key Autoincrement, "+
                     COL_NAME_FACH + " Text"+")";
             sqLiteDatabase.execSQL(table3);
 
             String table4 = " create table " + TABLE_FRAGEN + "("+COL_ID_FRAGEN +  " Integer Primary Key Autoincrement, "+
-                    COL_FRAGE + " Text"+")";
+                    COL_FRAGE + " Text)";
             sqLiteDatabase.execSQL(table4);
 
-            String table5 = " create table " + TABLE_TERMIN + "("+COL_ID_TERMIN +  "Integer Primary Key Autoincrement, "+
-                    COL_TERMIN_TITEL + "Text, "+ COL_TERMIN_BESCHREIBUNG + "Integer, "+ COL_TERMIN_DATE + "Date, "+
-                    COL_FK_BENUTZER_TERMIN + "Integer, FOREIGN KEY (" + COL_FK_BENUTZER_TERMIN + ") REFERENCES " +
+            String table5 = " create table " + TABLE_TERMIN + "("+COL_ID_TERMIN +  " Integer Primary Key Autoincrement, "+
+                    COL_TERMIN_TITEL + " Text, "+
+                    COL_TERMIN_BESCHREIBUNG + " Text, "+
+                    COL_TERMIN_DATE + " Date, "+
+                    COL_FK_BENUTZER_TERMIN + " Integer, FOREIGN KEY (" + COL_FK_BENUTZER_TERMIN + ") REFERENCES " +
                     TABLE_TERMIN + "("+ COL_ID_TERMIN+"))";
             sqLiteDatabase.execSQL(table5);
 
 
 
-            String table6 = " create table " + TABLE_BEWERTUNG + "("+COL_BEWERTUNG_ID+  "Integer Primary Key Autoincrement, "+
-                    COL_BEWERTUNG_NOTE + "Text, "+ COL_BEWERTUNG_BESCHREIBUNG + "Text, " + COL_BEWERTUNG_DATE + "Date, " +
-                    COL_FK_BENUTZER + "Integer, FOREIGN KEY (" + COL_FK_BENUTZER + ") REFERENCES " +
+            String table6 = " create table " + TABLE_BEWERTUNG + "("+COL_BEWERTUNG_ID+  " Integer Primary Key Autoincrement, "+
+                    COL_BEWERTUNG_NOTE + " Text, "+
+                    COL_BEWERTUNG_BESCHREIBUNG + " Text, " +
+                    COL_BEWERTUNG_DATE + " Date, " +
+                    COL_FK_BENUTZER + " Integer, FOREIGN KEY (" + COL_FK_BENUTZER + ") REFERENCES " +
                     TABLE_BENUTZER + "(" + COL_ID_BENUTZER + "))";
             sqLiteDatabase.execSQL(table6);
 
-            String table7 = " create table " + TABLE_FK + "("+COL_BENUTZER_ID +  "Integer Primary Key, "+
-                    COL_FACH_ID + "Integer Primary Key, "+ COL_BENUTZER_ID + "Integer, FOREIGN KEY (" +
+            String table7 = " create table " + TABLE_FK + "("+COL_BENUTZER_ID +  " Integer Primary Key, "+
+                    COL_FACH_ID + " Integer Primary Key, "+ COL_BENUTZER_ID + " Integer, FOREIGN KEY (" +
+                    COL_DURCHSCHNITTSNOTE + " Numeric, "+
                     COL_BENUTZER_ID + ") REFERENCES " + TABLE_BENUTZER + "("+ COL_ID_BENUTZER +"), " +
                     COL_FACH_ID + "Integer FOREIGN KEY ("+ COL_FACH_ID+ ") REFERENCES " + TABLE_FACH + "("+COL_ID_FACH+"))";
             sqLiteDatabase.execSQL(table7);
@@ -115,7 +119,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_BENUTZER);
-        sqLiteDatabase.execSQL("drop table if exists "+TABLE_LOGIN);
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_BEWERTUNG);
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_FACH);
         sqLiteDatabase.execSQL("drop table if exists "+TABLE_TERMIN);

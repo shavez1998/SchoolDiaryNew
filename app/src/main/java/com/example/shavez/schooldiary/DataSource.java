@@ -30,8 +30,8 @@ public class DataSource {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.COL_VORNAME, vorname);
         contentValues.put(DatabaseHelper.COL_NACHNAME, nachname);
-        contentValues.put(DatabaseHelper.COL_EMAIL, email);
-        contentValues.put(DatabaseHelper.COL_PASSWORT, passwort);
+        //contentValues.put(DatabaseHelper.COL_EMAIL, email);
+        //contentValues.put(DatabaseHelper.COL_PASSWORT, passwort);
         long result = database.insert(DatabaseHelper.TABLE_BENUTZER,null,contentValues);
         if(result == -1) return  false;
         return true;
