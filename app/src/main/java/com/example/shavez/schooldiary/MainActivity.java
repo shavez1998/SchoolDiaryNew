@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 buffer.append("Surname : " + cursor.getString(nachnameIndex) + "\n");
                 //buffer.append("Email : " + cursor.getString(emailIndex) + "\n");
                 //buffer.append("Passwort : " + cursor.getString(passwortIndex) + "\n\n");
-
+//tet
             }
             if(login)
                 showMessage("Data", buffer.toString());
