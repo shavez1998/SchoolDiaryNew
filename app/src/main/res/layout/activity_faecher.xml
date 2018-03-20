@@ -32,36 +32,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/search_text"
-        android:layout_marginBottom="100dp"
         android:id="@+id/lvFach" />
 
-    <Button
-        android:id="@+id/fach_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lvFach"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-75dp"
-        android:text="Edit" />
-
-    <Button
-        android:id="@+id/fach_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/fach_edit"
-        android:layout_alignBottom="@+id/fach_edit"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp"
-        android:text="Add" />
-
-    <Button
-        android:id="@+id/fach_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/fach_edit"
-        android:layout_alignBottom="@+id/fach_edit"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="23dp"
-        android:text="Delete" />
 </RelativeLayout>
 

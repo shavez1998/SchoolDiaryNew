@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Bewertung {
     int bewertung_id;
-    int note;
+    float note;
     String bewertung_beschreibung;
     Date bewertung_date;
 
@@ -16,7 +16,7 @@ public class Bewertung {
         //leer brauche?
     }
 
-    public Bewertung(int bewertung_id, int note, String bewertung_beschreibung, Date bewertung_date){
+    public Bewertung(int bewertung_id, float note, String bewertung_beschreibung, Date bewertung_date){
         this.bewertung_id = bewertung_id;
         this.note = note;
         this.bewertung_beschreibung = bewertung_beschreibung;
@@ -31,11 +31,11 @@ public class Bewertung {
         this.bewertung_id = bewertung_id;
     }
 
-    public int getNote() {
+    public float getNote() {
         return note;
     }
 
-    public void setNote(int note) {
+    public void setNote(float note) {
         this.note = note;
     }
 

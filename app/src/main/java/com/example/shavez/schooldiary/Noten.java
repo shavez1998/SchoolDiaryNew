@@ -14,23 +14,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Faecher extends AppCompatActivity {
+public class Noten extends AppCompatActivity {
 
     public ListView listView;
-    public FachAdapter fachAdapter;
-    private Button edit_btn, del_btn;
-    ArrayList<Fach> fach;
+    public NotenAdapter notenAdapter;
+    ArrayList<Bewertung> bewertungen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faecher);
         listView = (ListView) findViewById(R.id.lvFach);
-        edit_btn = (Button) findViewById(R.id.fach_edit);
-        del_btn = (Button) findViewById(R.id.fach_edit);
-        ArrayList<Fach> fach = new ArrayList<>();
-        fachAdapter = new FachAdapter(this, fach, this);
-        listView.setAdapter(fachAdapter);
-        fach = Fach.faecherLaden();
+        ArrayList<Bewertung> bw = new ArrayList<>();
+        notenAdapter = new NotenAdapter(this, bw, this);
+        listView.setAdapter(notenAdapter);
+        bewertungen = Fach.faecherLaden();
         listViewLaden(fach);
 
 

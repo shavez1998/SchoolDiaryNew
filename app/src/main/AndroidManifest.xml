@@ -18,6 +18,7 @@
         <activity android:name=".Register" />
         <activity android:name=".Menu" />
         <activity android:name=".Faecher" />
+        <activity android:name=".Noten"></activity>
     </application>
 
 </manifest>
