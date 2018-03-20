@@ -4,37 +4,36 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/fach_foto"
+        android:id="@+id/note_foto"
         android:layout_width="60dp"
         android:layout_height="56dp"
         android:layout_margin="8dp"
-        android:background="#b0e72e" />
+        android:background="@android:color/holo_green_light" />
 
     <TextView
-        android:id="@+id/fach_name"
+        android:id="@+id/note_titel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_toRightOf="@id/fach_foto"
+        android:layout_toRightOf="@id/note_foto"
         android:textSize="20dp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/fach_beschreibung"
+        android:id="@+id/note_datum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fach_name"
+        android:layout_below="@+id/note_titel"
         android:layout_marginTop="-3dp"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/fach_foto"
+        android:layout_marginLeft="85dp"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/dnote"
+        android:id="@+id/note_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/fach_beschreibung"
-        android:layout_alignStart="@+id/fach_foto"
+        android:layout_alignBottom="@+id/note_datum"
+        android:layout_alignStart="@+id/note_foto"
         android:text="5,3"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
@@ -44,11 +43,11 @@
         android:layout_marginBottom="6dp"/>
 
     <ImageView
-        android:id="@+id/fach_menuBox"
+        android:id="@+id/note_menuBox"
         android:layout_width="35dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/fach_name"
+        android:layout_alignTop="@+id/note_titel"
         android:layout_marginEnd="21dp"
         app:srcCompat="@drawable/menu_dots_foreground" />
 

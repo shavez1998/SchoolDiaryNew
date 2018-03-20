@@ -26,6 +26,10 @@ public class Fach {
     }
 
 
+    public void setFach_id(int id){ this.fach_id = id; }
+
+    public int getFach_id() { return  fach_id; }
+
     public String getFach_name() {
         return fach_name;
     }
@@ -52,9 +56,12 @@ public class Fach {
 
     public static ArrayList<Fach> faecherLaden(){
         ArrayList<Fach> list = new ArrayList<>();
+        float dnote = 4;
         for(int i=0; i < 30;i++){
             try {
-                Fach f = new Fach((i+1),"Java "+i,"Android Studio", 8);
+                dnote += 0.2;
+                dnote =  Math.round(dnote * 100)/ 100f;
+                Fach f = new Fach((i+1),"Java "+i,"Android Studio", dnote);
                 list.add(f);
             }catch (Exception e){
 

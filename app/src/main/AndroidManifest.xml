@@ -17,8 +17,16 @@
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".Menu" />
-        <activity android:name=".Faecher" />
-        <activity android:name=".Noten"></activity>
+        <activity
+            android:name=".Faecher"
+            android:parentActivityName=".Menu" />
+        <activity
+            android:name=".Register2"
+            android:parentActivityName=".Register" />
+        <activity
+            android:name=".Noten"
+            android:parentActivityName=".Faecher" />
+        <activity android:name=".Fach_Info"></activity>
     </application>
 
 </manifest>

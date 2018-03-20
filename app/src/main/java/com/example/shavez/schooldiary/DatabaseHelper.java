@@ -97,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
             String table6 = " create table " + TABLE_BEWERTUNG + "("+COL_BEWERTUNG_ID+  " Integer Primary Key Autoincrement, "+
-                    COL_BEWERTUNG_NOTE + " Text, "+
+                    COL_BEWERTUNG_NOTE + " Numeric, "+
                     COL_BEWERTUNG_BESCHREIBUNG + " Text, " +
                     COL_BEWERTUNG_DATE + " Date, " +
                     COL_FK_BENUTZER + " Integer, FOREIGN KEY (" + COL_FK_BENUTZER + ") REFERENCES " +
@@ -105,8 +105,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(table6);
 
             String table7 = " create table " + TABLE_FK + "("+COL_BENUTZER_ID +  " Integer Primary Key, "+
-                    COL_FACH_ID + " Integer Primary Key, "+ COL_BENUTZER_ID + " Integer, FOREIGN KEY (" +
                     COL_DURCHSCHNITTSNOTE + " Numeric, "+
+                    COL_FACH_ID + " Integer Primary Key, "+ COL_BENUTZER_ID + " Integer, FOREIGN KEY (" +
+
                     COL_BENUTZER_ID + ") REFERENCES " + TABLE_BENUTZER + "("+ COL_ID_BENUTZER +"), " +
                     COL_FACH_ID + "Integer FOREIGN KEY ("+ COL_FACH_ID+ ") REFERENCES " + TABLE_FACH + "("+COL_ID_FACH+"))";
             sqLiteDatabase.execSQL(table7);

@@ -1,5 +1,6 @@
 package com.example.shavez.schooldiary;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button register;
     EditText emailText;
     EditText passwortText;
+    public static int USER_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,34 +34,42 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataSource.open();
-                Intent i = new Intent(MainActivity.this, Faecher.class);
+                Intent i = new Intent(MainActivity.this, Register.class);
                 startActivity(i);
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDataBenutzer(dataSource.getDataBenutzer());
+                boolean nichtAusgefuhlt = true;
+                if(!emailText.getText().toString().isEmpty())
+                    if(!passwortText.getText().toString().isEmpty())
+                                nichtAusgefuhlt = false;
+
+                if(nichtAusgefuhlt){
+                    showMessage("ERROR","Bitte alle Feldern Ausfühlen");
+                } else {
+                    Intent i = new Intent(MainActivity.this, Menu.class);
+                    startActivity(i);
+                }
+
+
+                //ATEEQ QUERY : EMAIL UND PASSWORD ÜBERPRÜFEN, USER_ID SPEICHERN
             }
         });
 
-        try {
-            Intent intent = getIntent();
-            Bundle bundle = intent.getExtras();
-            dataSource.open();
-            insertDataBenutzer(bundle.get("vorname").toString(),bundle.get("nachname").toString(),
-                    bundle.get("email").toString(),bundle.get("passwort").toString());
-            dataSource.close();
-        } catch (Exception e){
-
-        }
     }
     public  void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
         builder.show();
     }
 
@@ -90,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                 buffer.append("Surname : " + cursor.getString(nachnameIndex) + "\n");
                 //buffer.append("Email : " + cursor.getString(emailIndex) + "\n");
                 //buffer.append("Passwort : " + cursor.getString(passwortIndex) + "\n\n");
-//tet
             }
             if(login)
                 showMessage("Data", buffer.toString());
@@ -100,8 +109,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void insertDataBenutzer(String vorname,String nachname, String email, String passwort){
-        dataSource.insertDataBenutzer(vorname,nachname, email,passwort);
-        Toast.makeText(this,"Registered", Toast.LENGTH_LONG).show();
-    }
+
 }

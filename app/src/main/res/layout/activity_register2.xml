@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shavez.schooldiary.MainActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="200px"
+        android:layout_height="250px"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="0dp"
+        app:srcCompat="@mipmap/menu_icon" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/imageView2"
+        android:fontFamily="casual"
+        android:text="School"
+        android:textAllCaps="false"
+        android:textColor="#0000ff"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-20dp"
+        android:fontFamily="casual"
+        android:text="Diary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+
+    <Spinner
+        android:id="@+id/frage1"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp" />
+    <EditText
+        android:id="@+id/antwort1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frage1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="Vorname"
+        android:inputType="textPersonName"
+        android:textSize="25sp" />
+
+    <Spinner
+        android:id="@+id/frage2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/antwort1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp" />
+    <EditText
+        android:id="@+id/antwort2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frage2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="Vorname"
+        android:inputType="textPersonName"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/r_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/antwort2"
+        android:layout_alignEnd="@+id/antwort2"
+        android:layout_marginTop="30dp"
+        android:text="Register"
+        android:textSize="25sp"/>
+
+
+    <Button
+        android:id="@+id/r_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/antwort2"
+        android:layout_alignStart="@+id/antwort2"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="0dp"
+        android:text="Cancel"
+        android:textSize="25sp"/>
+
+
+
+</RelativeLayout>

@@ -29,8 +29,8 @@ public class Menu extends AppCompatActivity {
         school.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent i = new Intent(Menu.this, School.class);
-                //startActivity(i);
+                Intent i = new Intent(Menu.this, Faecher.class);
+                startActivity(i);
             }
         });
         group.setOnClickListener(new View.OnClickListener() {

@@ -50,10 +50,10 @@
         android:id="@+id/termin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/group"
         android:layout_centerVertical="true"
         android:text="Termin"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:id="@+id/school"
@@ -69,11 +69,14 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
+        android:layout_alignStart="@+id/school"
+        android:layout_below="@+id/school"
+        android:layout_marginTop="34dp"
         android:text="Group"
         android:textSize="30sp" />
+
+
+
 
 
 </RelativeLayout>

@@ -3,6 +3,8 @@ package com.example.shavez.schooldiary;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,9 +29,11 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
     ViewHolder vHolder;
 
     private static class ViewHolder {
-        public TextView name;
-        public TextView beschreibung;
-        public ImageView infoBox;
+        public TextView titel;
+        public TextView note;
+        public TextView datum;
+        public ImageView menuBox;
+        public ImageView note_foto;
         public int itemId;
     }
 
@@ -40,30 +44,45 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
     }
 
     public View getView(final int position, View converView, final ViewGroup viewGroup) {
-        Bewertung bewertung = getItem(position); //  Akktuelle Buch Anzeige
+        Bewertung bewertung = getItem(position);
         final ViewHolder viewHolder;
         if (converView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            converView = inflater.inflate(R.layout.item_fach, viewGroup, false); // Fügt zu unseren ListView Layout item_book Layout zu
-            viewHolder.name = (TextView) converView.findViewById(R.id.fach_name);
-            viewHolder.beschreibung = (TextView) converView.findViewById(R.id.fach_beschreibung);
-            viewHolder.infoBox = (ImageView) converView.findViewById(R.id.infoBox);
+            converView = inflater.inflate(R.layout.item_note, viewGroup, false);
+            viewHolder.titel = (TextView) converView.findViewById(R.id.note_titel);
+            viewHolder.note = (TextView) converView.findViewById(R.id.note_note);
+            viewHolder.datum = (TextView) converView.findViewById(R.id.note_datum);
+            viewHolder.menuBox = (ImageView) converView.findViewById(R.id.note_menuBox);
+            viewHolder.note_foto = (ImageView) converView.findViewById(R.id.note_foto);
             converView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) converView.getTag();
         }
-        viewHolder.name.setText( "" + bewertung.getNote());
-        viewHolder.beschreibung.setText(bewertung.getBewertung_beschreibung());
-        viewHolder.itemId = bewertung.getBewertung_id();
+        viewHolder.titel.setText(bewertung.getBewertung_titel());
+        viewHolder.note.setText("" + bewertung.getNote());
+        viewHolder.datum.setText(bewertung.getBewertung_datum());
         vHolder = viewHolder;
 
+        int note_ohne_komma = (int) bewertung.getNote();
+        if(bewertung.getNote() >= 10.0){
+            viewHolder.note.setText("" + note_ohne_komma);
+        }else{
+            viewHolder.note.setText("" + bewertung.getNote());
+        }
+        if(bewertung.getNote() < 6){
+            int red = Color.parseColor("#FFE7442E");
+            viewHolder.note_foto.setBackgroundColor(red);
+        } else {
+            int green = Color.parseColor("#b0e72e");
+            viewHolder.note_foto.setBackgroundColor(green);
+        }
         try {
-            viewHolder.infoBox.setOnClickListener(new View.OnClickListener() {
+            viewHolder.menuBox.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    if(v.getId() == R.id.infoBox){
+                    if(v.getId() == R.id.note_menuBox){
                         PopupMenu popup = new PopupMenu(context, v);
                         popup.getMenuInflater().inflate(R.menu.menu,
                                 popup.getMenu());
@@ -72,18 +91,17 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()) {
-                                    case R.id.fach_info:
-                                        Toast.makeText(context, " Info " + " : " + viewHolder.name.toString(), Toast.LENGTH_LONG).show();
+                                    case R.id.info:
+                                        Toast.makeText(context, " Info " + " : " + viewHolder.titel.toString(), Toast.LENGTH_LONG).show();
                                         break;
-                                    case R.id.fach_edit:
+                                    case R.id.edit:
                                         Toast.makeText(context, "Edit " + " : " + position, Toast.LENGTH_LONG).show();
                                         break;
 
-                                    case R.id.fach_delete:
+                                    case R.id.delete:
                                         AlertDialog.Builder adb=new AlertDialog.Builder(context);
                                         adb.setTitle("Delete?");
                                         adb.setMessage("Are you sure you want to delete " + position);
-                                        final int positionToRemove = position;
                                         adb.setNegativeButton("Cancel", null);
                                         adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
@@ -101,8 +119,6 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
                             }
                         });
                     }
-
-
                 }
             });
 
