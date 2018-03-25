@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+
 public class MainActivity extends AppCompatActivity {
 
     DataSource dataSource;
@@ -108,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
             dataSource.close();
         }
     }
+
+
 
 
 }
