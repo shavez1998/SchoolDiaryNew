@@ -52,6 +52,7 @@
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp" />
+
     <EditText
         android:id="@+id/antwort1"
         android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
         android:ems="10"
-        android:hint="Vorname"
+        android:hint="Antwort"
         android:inputType="textPersonName"
         android:textSize="25sp" />
 
@@ -71,6 +72,7 @@
         android:layout_below="@+id/antwort1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp" />
+
     <EditText
         android:id="@+id/antwort2"
         android:layout_width="wrap_content"
@@ -79,7 +81,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
         android:ems="10"
-        android:hint="Vorname"
+        android:hint="Antwort"
         android:inputType="textPersonName"
         android:textSize="25sp" />
 

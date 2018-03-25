@@ -15,10 +15,12 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
+    Benutzer benutzer;
     DataSource dataSource;
     Button login;
     Button register;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dataSource = new DataSource(this);
+        benutzer = new Benutzer();
 
         login = (Button) findViewById(R.id.login);
         register = (Button) findViewById(R.id.register);
@@ -40,30 +43,35 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Register.class);
-                startActivity(i);
+                try {
+                    JSONObject json = new JSONObject();
+                    json.put("vorname", "Ali");
+                    json.put("nachname", "Shan");
+                    json.put("frage", "Wem lieben Sie?");
+                    json.put("antwort", "Waheed");
+                    json.put("email", "alishan@yahoo.com");
+                    json.put("passwort", "AliShan");
+                    json.put("frage2", "Wo ist ihr Vater geboren?");
+                    json.put("antwort2", "Val di Funes");
+                    DatenHochladen t = new DatenHochladen("registerReceive");
+                    t.execute(new JSONObject[]{json});
+                }catch (Exception e){
+
+                }
+
+
+                //Intent i = new Intent(MainActivity.this, Register.class);
+                //startActivity(i);
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), "I AM IN", Toast.LENGTH_LONG).show();
-                Client client = new Client();
-                client.getDaten("shavez123@gmail.com", new JsonHttpResponseHandler(){
-                    @Override
-                    public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
-                        try{
-                            Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
-                            emailText.setText(response.toString());
-                        } catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-                //TestJSON json = new TestJSON();
-                //json.clickbuttonRecieve(v);
-                /*boolean nichtAusgefuhlt = true;
+
+
+
+                boolean nichtAusgefuhlt = true;
                 if(!emailText.getText().toString().isEmpty())
                     if(!passwortText.getText().toString().isEmpty())
                                 nichtAusgefuhlt = false;
@@ -71,9 +79,55 @@ public class MainActivity extends AppCompatActivity {
                 if(nichtAusgefuhlt){
                     showMessage("ERROR","Bitte alle Feldern Ausfühlen");
                 } else {
-                    Intent i = new Intent(MainActivity.this, Menu.class);
-                    startActivity(i);
-                }*/
+                    Client client = new Client();
+                    String url = "f=checkLogin"+"&e="+emailText.getText().toString()+"&p="+passwortText.getText().toString();
+                    client.getDaten("benutzer",url, new JsonHttpResponseHandler(){
+                        @Override
+                        public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
+                            try{
+                                JSONArray arr;
+                                if(response != null){
+                                    arr = response.getJSONArray("daten");
+                                    JSONObject data = arr.getJSONObject(0);
+                                    if(data.has("id")){
+                                        int id = Integer.parseInt(data.getString("id"));
+                                        benutzer.setBenutzer_id(id);
+                                    }
+                                    if(data.has("vorname")){
+                                        benutzer.setVorname(data.getString("vorname"));
+                                    }
+                                    if(data.has("nachname")){
+                                        benutzer.setNachname(data.getString("nachname"));
+                                    }
+                                    if(data.has("email")){
+                                        benutzer.setEmail(data.getString("email"));
+                                    }
+                                    if(data.has("passwort")){
+                                        benutzer.setPassword(data.getString("passwort"));
+                                    }
+                                    if(data.has("frage")){
+                                        benutzer.setFrage(data.getString("frage"));
+                                    }
+                                    if(data.has("frage2")){
+                                        benutzer.setFrage2(data.getString("frage2"));
+                                    }
+                                    if(data.has("antwort")){
+                                        benutzer.setAntwort(data.getString("antwort"));
+                                    }
+                                    if(data.has("antwort2")){
+                                        benutzer.setAntwort2(data.getString("antwort2"));
+                                    }
+                                }
+                                Toast.makeText(getApplicationContext    (), response.toString(), Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(MainActivity.this, Menu.class);
+                                startActivity(i);
+                            } catch (Exception e){
+                                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+                }
 
 
                 //ATEEQ QUERY : EMAIL UND PASSWORD ÜBERPRÜFEN, USER_ID SPEICHERN

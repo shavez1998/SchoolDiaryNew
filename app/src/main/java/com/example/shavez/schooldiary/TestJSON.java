@@ -82,8 +82,14 @@ public class TestJSON extends Activity {
     public  void clickbuttonRecieve(View v) {
         try {
             JSONObject json = new JSONObject();
-            json.put("UserName", "test2");
-            json.put("FullName", "1234567");
+            json.put("vorname", "Ali");
+            json.put("nachname", "Shan");
+            json.put("frage", "Wem lieben Sie?");
+            json.put("antwort", "Waheed");
+            json.put("email", "alishan@yahoo.com");
+            json.put("passwort", "AliShan");
+            json.put("frage2", "Wo ist ihr Vater geboren?");
+            json.put("antwort2", "Val di Funes");
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams,
                     TIMEOUT_MILLISEC);
@@ -91,18 +97,17 @@ public class TestJSON extends Activity {
             HttpClient client = new DefaultHttpClient(httpParams);
             //
             //String url = "http://10.0.2.2:8080/sample1/webservice2.php?json={\"UserName\":1,\"FullName\":2}";
-            String url = "https://gamifygames.000webhostapp.com/SchoolDiary/benutzer.php";
+            String url = "https://gamifygames.000webhostapp.com/SchoolDiary/registerReceive.php";
 
             HttpPost request = new HttpPost(url);
             request.setEntity(new ByteArrayEntity(json.toString().getBytes(
                     "UTF8")));
-            request.setHeader("json", json.toString());
+            request.setHeader("daten", json.toString());
             HttpResponse response = client.execute(request);
-            //HttpEntity entity = response.getEntity();
+            HttpEntity entity = response.getEntity();
 
         } catch (Throwable t) {
-            Toast.makeText(this, "Request failed: " + t.toString(),
-                    Toast.LENGTH_LONG).show();
+
         }
     }
 

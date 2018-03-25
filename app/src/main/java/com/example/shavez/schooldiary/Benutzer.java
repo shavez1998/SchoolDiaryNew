@@ -11,6 +11,13 @@ public class Benutzer {
     String password;
     String vorname;
     String nachname;
+    String frage;
+
+
+
+    String antwort;
+    String frage2;
+    String antwort2;
 
     //Konstruktoren
     public Benutzer(){
@@ -57,13 +64,29 @@ public class Benutzer {
         this.vorname = vorname;
     }
 
-    public String getNachname() {
-        return nachname;
+    public String getNachname() { return nachname; }
+
+    public void setNachname(String nachname) { this.nachname = nachname; }
+
+    public String getAntwort() { return antwort;}
+
+    public void setAntwort(String antwort) { this.antwort = antwort;}
+
+    public String getFrage2() { return frage2;}
+
+    public void setFrage2(String frage2) { this.frage2 = frage2;}
+
+    public String getFrage() {
+        return frage;
     }
 
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
+    public void setFrage(String frage) {
+        this.frage = frage;
     }
+
+    public String getAntwort2() { return antwort2; }
+
+    public void setAntwort2(String antwort2) { this.antwort2 = antwort2; }
 
 
 }

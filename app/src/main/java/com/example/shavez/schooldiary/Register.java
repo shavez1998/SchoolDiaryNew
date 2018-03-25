@@ -21,7 +21,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        register = (Button) findViewById(R.id.r_register);
+        register = (Button) findViewById(R.id.r_register_next);
         cancel = (Button) findViewById(R.id.r_cancel);
         vorname = (EditText) findViewById(R.id.r_vorname);
         nachname = (EditText) findViewById(R.id.r_nachname);
@@ -42,8 +42,11 @@ public class Register extends AppCompatActivity {
                 if(nichtAusgefuhlt){
                     showMessage("ERROR","Bitte alle Feldern Ausfühlen");
                 } else {
-                    Toast.makeText(Register.this,"Registered", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(Register.this, MainActivity.class);
+                    Intent i = new Intent(Register.this, Register2.class);
+                    i.putExtra("vorname",vorname.getText().toString());
+                    i.putExtra("nachname",nachname.getText().toString());
+                    i.putExtra("email",email.getText().toString());
+                    i.putExtra("passwort",passwort.getText().toString());
                     startActivity(i);
                 }
 

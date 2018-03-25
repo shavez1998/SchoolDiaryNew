@@ -92,14 +92,14 @@
         android:textSize="25sp" />
 
     <Button
-        android:id="@+id/r_register"
+        android:id="@+id/r_register_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/r_passwort"
         android:layout_alignEnd="@+id/r_passwort"
+        android:layout_below="@+id/r_passwort"
         android:layout_marginTop="30dp"
-        android:text="Register"
-        android:textSize="25sp"/>
+        android:text="Next"
+        android:textSize="25sp" />
 
 
     <Button

@@ -16,9 +16,9 @@ public class Client {
         client = new AsyncHttpClient();
     }
 
-    public void getDaten(String query, JsonHttpResponseHandler handler){
+    public void getDaten(String file_name,String parameter, JsonHttpResponseHandler handler){
         try{
-            String url = "https://gamifygames.000webhostapp.com/SchoolDiary/benutzer.php?userEmail="+ query;
+            String url = "https://gamifygames.000webhostapp.com/SchoolDiary/"+file_name+".php?"+parameter;
             client.get(url , handler);
         }catch (Exception e){
 
