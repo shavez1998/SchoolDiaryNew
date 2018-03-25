@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shavez.schooldiary">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
@@ -27,7 +28,6 @@
             android:name=".Noten"
             android:parentActivityName=".Faecher" />
         <activity android:name=".Fach_Info" />
-        <activity android:name=".Main" />
         <activity android:name=".TestJSON"></activity>
     </application>
 

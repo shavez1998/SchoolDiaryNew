@@ -79,7 +79,7 @@ public class TestJSON extends Activity {
         }
     }
 
-    public void clickbuttonRecieve(View v) {
+    public  void clickbuttonRecieve(View v) {
         try {
             JSONObject json = new JSONObject();
             json.put("UserName", "test2");
@@ -91,15 +91,14 @@ public class TestJSON extends Activity {
             HttpClient client = new DefaultHttpClient(httpParams);
             //
             //String url = "http://10.0.2.2:8080/sample1/webservice2.php?json={\"UserName\":1,\"FullName\":2}";
-            String url = "http://10.0.2.2:8080/sample1/webservice2.php";
+            String url = "https://gamifygames.000webhostapp.com/SchoolDiary/benutzer.php";
 
             HttpPost request = new HttpPost(url);
             request.setEntity(new ByteArrayEntity(json.toString().getBytes(
                     "UTF8")));
             request.setHeader("json", json.toString());
             HttpResponse response = client.execute(request);
-            HttpEntity entity = response.getEntity();
-            // If the response does not enclose an entity, there is no need
+            //HttpEntity entity = response.getEntity();
 
         } catch (Throwable t) {
             Toast.makeText(this, "Request failed: " + t.toString(),
@@ -119,12 +118,13 @@ public class TestJSON extends Activity {
             //
             HttpParams p = new BasicHttpParams();
             // p.setParameter("name", pvo.getName());
-            p.setParameter("user", "1");
+            p.setParameter("userEmail", "shavez123@gmail");
 
             // Instantiate an HttpClient
             HttpClient httpclient = new DefaultHttpClient(p);
             String url = "http://10.0.2.2:8080/sample1/webservice1.php?user=1&format=json";
-            HttpPost httppost = new HttpPost(url);
+            String url1 = "https://gamifygames.000webhostapp.com/SchoolDiary/benutzer.php?userEmail=shavez123@gmail.com";
+            HttpPost httppost = new HttpPost(url1);
 
             // Instantiate a GET HTTP method
             try {
@@ -132,26 +132,28 @@ public class TestJSON extends Activity {
                 //
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
                         2);
-                nameValuePairs.add(new BasicNameValuePair("user", "1"));
+                nameValuePairs.add(new BasicNameValuePair("userEmail", "shavez123@gmail.com"));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                Log.i(getClass().getSimpleName(), "send  task - start    ALL OK1");
                 ResponseHandler<String> responseHandler = new BasicResponseHandler();
                 String responseBody = httpclient.execute(httppost,
                         responseHandler);
+                Log.i(getClass().getSimpleName(), "send  task - start    ALL OK2");
                 // Parse
                 JSONObject json = new JSONObject(responseBody);
-                JSONArray jArray = json.getJSONArray("posts");
+                JSONArray jArray = json.getJSONArray("daten");
                 ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
 
                 for (int i = 0; i < jArray.length(); i++) {
                     HashMap<String, String> map = new HashMap<String, String>();
                     JSONObject e = jArray.getJSONObject(i);
-                    String s = e.getString("post");
+                    String s = e.getString("vorname");
                     JSONObject jObject = new JSONObject(s);
-
+                    /*
                     map.put("idusers", jObject.getString("idusers"));
                     map.put("UserName", jObject.getString("UserName"));
                     map.put("FullName", jObject.getString("FullName"));
-
+                    */
                     mylist.add(map);
                 }
                 Toast.makeText(this, responseBody, Toast.LENGTH_LONG).show();

@@ -11,8 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +47,23 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean nichtAusgefuhlt = true;
+
+                Toast.makeText(getApplicationContext(), "I AM IN", Toast.LENGTH_LONG).show();
+                Client client = new Client();
+                client.getDaten("shavez123@gmail.com", new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
+                        try{
+                            Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                            emailText.setText(response.toString());
+                        } catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                //TestJSON json = new TestJSON();
+                //json.clickbuttonRecieve(v);
+                /*boolean nichtAusgefuhlt = true;
                 if(!emailText.getText().toString().isEmpty())
                     if(!passwortText.getText().toString().isEmpty())
                                 nichtAusgefuhlt = false;
@@ -54,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Intent i = new Intent(MainActivity.this, Menu.class);
                     startActivity(i);
-                }
+                }*/
 
 
                 //ATEEQ QUERY : EMAIL UND PASSWORD ÜBERPRÜFEN, USER_ID SPEICHERN
