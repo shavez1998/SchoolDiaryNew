@@ -11,16 +11,14 @@ import java.util.ArrayList;
 
 public class Fach {
     String fach_name;
-    String fach_beschreibung;
     float dnote;
     int fach_id;
 
     public Fach(){
         //leer, brauchen?
     }
-    public Fach(int id, String fach_name, String fach_beschreibung, float durchschnittsnote){
+    public Fach(int id, String fach_name, float durchschnittsnote){
         this.fach_name = fach_name;
-        this.fach_beschreibung = fach_beschreibung;
         this.dnote = durchschnittsnote;
         this.fach_id = id;
     }
@@ -38,14 +36,6 @@ public class Fach {
         this.fach_name = fach_name;
     }
 
-    public String getFach_beschreibung() {
-        return fach_beschreibung;
-    }
-
-    public void setFach_beschreibung(String fach_beschreibung) {
-        this.fach_beschreibung = fach_beschreibung;
-    }
-
     public float getDurchschnittsnote() {
         return dnote;
     }
@@ -61,7 +51,7 @@ public class Fach {
             try {
                 dnote += 0.2;
                 dnote =  Math.round(dnote * 100)/ 100f;
-                Fach f = new Fach((i+1),"Java "+i,"Android Studio", dnote);
+                Fach f = new Fach((i+1),"Java "+i, dnote);
                 list.add(f);
             }catch (Exception e){
 

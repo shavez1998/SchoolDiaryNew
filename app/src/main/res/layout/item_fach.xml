@@ -19,29 +19,20 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/fach_beschreibung"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fach_name"
-        android:layout_marginTop="-3dp"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/fach_foto"
-        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/dnote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/fach_beschreibung"
+        android:layout_alignBottom="@+id/fach_menuBox"
         android:layout_alignStart="@+id/fach_foto"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
         android:text="5,3"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="6dp"/>
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/fach_menuBox"

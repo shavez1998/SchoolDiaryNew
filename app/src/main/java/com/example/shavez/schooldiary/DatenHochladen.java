@@ -7,13 +7,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DatenHochladen extends AsyncTask<JSONObject, JSONObject, JSONObject> {
 
     String url ="";
-
+    String r = "";
     public DatenHochladen(String file_name){
        this.url = "https://gamifygames.000webhostapp.com/SchoolDiary/"+file_name+".php";
     }
@@ -34,10 +36,12 @@ public class DatenHochladen extends AsyncTask<JSONObject, JSONObject, JSONObject
             HttpResponse response;
             response = client.execute(post);
             String resFromServer = org.apache.http.util.EntityUtils.toString(response.getEntity());
-
+            r = resFromServer;
         } catch (Exception e) { e.printStackTrace();}
 
         return jsonResponse;
     }
-
+    public String getRespone(){
+        return r;
+    }
 }

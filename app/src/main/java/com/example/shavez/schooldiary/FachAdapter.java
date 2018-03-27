@@ -31,7 +31,6 @@ public class FachAdapter extends ArrayAdapter<Fach> {
 
     private static class ViewHolder {
         public TextView name;
-        public TextView beschreibung;
         public TextView dnote;
         public ImageView menuBox;
         public ImageView fach_foto;
@@ -51,7 +50,6 @@ public class FachAdapter extends ArrayAdapter<Fach> {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             converView = inflater.inflate(R.layout.item_fach, viewGroup, false);
             viewHolder.name = (TextView) converView.findViewById(R.id.fach_name);
-            viewHolder.beschreibung = (TextView) converView.findViewById(R.id.fach_beschreibung);
             viewHolder.dnote = (TextView) converView.findViewById(R.id.dnote);
             viewHolder.menuBox = (ImageView) converView.findViewById(R.id.fach_menuBox);
             viewHolder.fach_foto = (ImageView) converView.findViewById(R.id.fach_foto);
@@ -60,7 +58,6 @@ public class FachAdapter extends ArrayAdapter<Fach> {
             viewHolder = (ViewHolder) converView.getTag();
         }
         viewHolder.name.setText(fach.getFach_name());
-        viewHolder.beschreibung.setText(fach.getFach_beschreibung());
         int note_ohne_komma = (int) fach.getDurchschnittsnote();
         if(fach.getDurchschnittsnote() >= 10.0){
             viewHolder.dnote.setText("" + note_ohne_komma);

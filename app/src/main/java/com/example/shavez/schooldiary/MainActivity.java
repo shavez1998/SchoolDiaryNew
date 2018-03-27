@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    Benutzer benutzer;
+    public static Benutzer benutzer;
     DataSource dataSource;
     Button login;
     Button register;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
+                /*try {
                     JSONObject json = new JSONObject();
                     json.put("vorname", "Ali");
                     json.put("nachname", "Shan");
@@ -58,18 +58,16 @@ public class MainActivity extends AppCompatActivity {
                 }catch (Exception e){
 
                 }
+                */
 
 
-                //Intent i = new Intent(MainActivity.this, Register.class);
-                //startActivity(i);
+                Intent i = new Intent(MainActivity.this, Register.class);
+                startActivity(i);
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
 
                 boolean nichtAusgefuhlt = true;
                 if(!emailText.getText().toString().isEmpty())
@@ -79,12 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 if(nichtAusgefuhlt){
                     showMessage("ERROR","Bitte alle Feldern Ausfühlen");
                 } else {
+
                     Client client = new Client();
                     String url = "f=checkLogin"+"&e="+emailText.getText().toString()+"&p="+passwortText.getText().toString();
                     client.getDaten("benutzer",url, new JsonHttpResponseHandler(){
                         @Override
                         public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
                             try{
+                                boolean login = true;
                                 JSONArray arr;
                                 if(response != null){
                                     arr = response.getJSONArray("daten");
@@ -117,10 +117,17 @@ public class MainActivity extends AppCompatActivity {
                                     if(data.has("antwort2")){
                                         benutzer.setAntwort2(data.getString("antwort2"));
                                     }
+                                    if(data.has("error")){
+                                        showMessage("ERROR","Email oder Passwort falsch!!");
+                                        passwortText.setText("");
+                                        login = false;
+                                    }
                                 }
-                                Toast.makeText(getApplicationContext    (), response.toString(), Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(MainActivity.this, Menu.class);
-                                startActivity(i);
+                                if(login) {
+                                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(MainActivity.this, Menu.class);
+                                    startActivity(i);
+                                }
                             } catch (Exception e){
                                 Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
                             }

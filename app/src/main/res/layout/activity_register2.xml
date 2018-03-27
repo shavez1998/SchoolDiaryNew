@@ -97,14 +97,14 @@
 
 
     <Button
-        android:id="@+id/r_cancel"
+        android:id="@+id/r_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/antwort2"
         android:layout_alignStart="@+id/antwort2"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="0dp"
-        android:text="Cancel"
+        android:text="Back"
         android:textSize="25sp"/>
 
 

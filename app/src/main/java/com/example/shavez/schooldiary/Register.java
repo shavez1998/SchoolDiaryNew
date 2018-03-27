@@ -12,16 +12,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import static com.example.shavez.schooldiary.MainActivity.benutzer;
+
 public class Register extends AppCompatActivity {
 
     EditText vorname,nachname,email,passwort;
-    Button register,cancel;
+    Button next,cancel;
     DataSource dataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        register = (Button) findViewById(R.id.r_register_next);
+        next = (Button) findViewById(R.id.r_register_next);
         cancel = (Button) findViewById(R.id.r_cancel);
         vorname = (EditText) findViewById(R.id.r_vorname);
         nachname = (EditText) findViewById(R.id.r_nachname);
@@ -29,43 +38,52 @@ public class Register extends AppCompatActivity {
         passwort = (EditText) findViewById(R.id.r_passwort);
         dataSource = new DataSource(this);
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean nichtAusgefuhlt = true;
-                if(!vorname.getText().toString().isEmpty())
-                    if(!nachname.getText().toString().isEmpty())
-                        if(!email.getText().toString().isEmpty())
-                            if(!passwort.getText().toString().isEmpty())
-                                nichtAusgefuhlt = false;
+        next.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
 
-                if(nichtAusgefuhlt){
-                    showMessage("ERROR","Bitte alle Feldern Ausfühlen");
-                } else {
-                    Intent i = new Intent(Register.this, Register2.class);
-                    i.putExtra("vorname",vorname.getText().toString());
-                    i.putExtra("nachname",nachname.getText().toString());
-                    i.putExtra("email",email.getText().toString());
-                    i.putExtra("passwort",passwort.getText().toString());
-                    startActivity(i);
-                }
+                                        boolean nichtAusgefuhlt = true;
+                                        if (!vorname.getText().toString().isEmpty())
+                                            if (!nachname.getText().toString().isEmpty())
+                                                if (!email.getText().toString().isEmpty())
+                                                    if (!passwort.getText().toString().isEmpty())
+                                                        nichtAusgefuhlt = false;
 
-                // ATEEQ QUERY : -ÜBERPRÜFEN OB DIE GEGEBENE EMAIL VORHANDEN IST, WENN JA FEHLERMELDUNG
-                //               -WENN ALLES PASST; DATEN IN DATENBANK SPEICHERN
+                                        if (nichtAusgefuhlt) {
+                                            showMessage("ERROR", "Bitte alle Feldern Ausfühlen");
+                                        } else {
+                                            Client client = new Client();
+                                            String url = "f=checkRegister" + "&e=" + email.getText().toString();
+                                            client.getDaten("registerReceive", url, new JsonHttpResponseHandler() {
+                                                @Override
+                                                public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                                                    try {
+                                                        boolean login = true;
+                                                        JSONArray arr;
+                                                        if (response != null) {
+                                                            arr = response.getJSONArray("daten");
+                                                            JSONObject data = arr.getJSONObject(0);
+                                                            if (data.has("create")) {
+                                                                Intent i = new Intent(Register.this, Register2.class);
+                                                                i.putExtra("vorname", vorname.getText().toString());
+                                                                i.putExtra("nachname", nachname.getText().toString());
+                                                                i.putExtra("email", email.getText().toString());
+                                                                i.putExtra("passwort", passwort.getText().toString());
+                                                                startActivity(i);
+                                                            }
+                                                            if (data.has("error")) {
+                                                                showMessage("ERROR", "Email existiert bereits!");
+                                                            }
 
-
-                /*
-                dataSource.open();
-                boolean emailUsed = checkIfEmailUsed(dataSource.getDataBenutzer());
-                dataSource.close();
-                if(!emailUsed){
-                    Toast.makeText(Register.this,"Registered", Toast.LENGTH_LONG).show();
-                } else{
-                    Toast.makeText(Register.this,"Email Used", Toast.LENGTH_LONG).show();
-                }
-                */
-            }
-        });
+                                                        }
+                                                    } catch (Exception e) {
+                                                        Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,4 +129,6 @@ public class Register extends AppCompatActivity {
         });
         builder.show();
     }
+
+
 }
