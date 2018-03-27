@@ -62,7 +62,7 @@
         android:layout_alignStart="@+id/termin"
         android:layout_below="@+id/termin"
         android:layout_marginTop="34dp"
-        android:text="School"
+        android:text="Fach"
         android:textSize="30sp" />
 
     <Button

@@ -3,6 +3,7 @@ package com.example.shavez.schooldiary;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by ahmed on 11.03.2018.
@@ -34,7 +37,6 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
         public TextView datum;
         public ImageView menuBox;
         public ImageView note_foto;
-        public int itemId;
     }
 
     public NotenAdapter(Context c, ArrayList<Bewertung> arr_noten, Noten noten) {
@@ -91,10 +93,13 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()) {
-                                    case R.id.info:
-                                        Toast.makeText(context, " Info " + " : " + viewHolder.titel.toString(), Toast.LENGTH_LONG).show();
-                                        break;
                                     case R.id.edit:
+                                        Intent i = new Intent(noten.getApplicationContext(),Noten_Edit.class);
+                                        i.putExtra("id", position);
+                                        i.putExtra("titel", noten.notenAdapter.getItem(position).getBewertung_titel());
+                                        i.putExtra("datum", noten.notenAdapter.getItem(position).getBewertung_datum());
+                                        i.putExtra("note", noten.notenAdapter.getItem(position).getNote()+"");
+                                        startActivity(context, i, null);
                                         Toast.makeText(context, "Edit " + " : " + position, Toast.LENGTH_LONG).show();
                                         break;
 

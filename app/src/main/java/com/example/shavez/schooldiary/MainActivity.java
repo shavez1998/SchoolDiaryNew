@@ -43,24 +43,6 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*try {
-                    JSONObject json = new JSONObject();
-                    json.put("vorname", "Ali");
-                    json.put("nachname", "Shan");
-                    json.put("frage", "Wem lieben Sie?");
-                    json.put("antwort", "Waheed");
-                    json.put("email", "alishan@yahoo.com");
-                    json.put("passwort", "AliShan");
-                    json.put("frage2", "Wo ist ihr Vater geboren?");
-                    json.put("antwort2", "Val di Funes");
-                    DatenHochladen t = new DatenHochladen("registerReceive");
-                    t.execute(new JSONObject[]{json});
-                }catch (Exception e){
-
-                }
-                */
-
-
                 Intent i = new Intent(MainActivity.this, Register.class);
                 startActivity(i);
             }
@@ -110,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                                 if(login) {
-                                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                                     Intent i = new Intent(MainActivity.this, Menu.class);
                                     startActivity(i);
                                 }

@@ -82,24 +82,18 @@ public class FachAdapter extends ArrayAdapter<Fach> {
                 public void onClick(View v) {
                     if(v.getId() == R.id.fach_menuBox){
                             PopupMenu popup = new PopupMenu(context, v);
-                            popup.getMenuInflater().inflate(R.menu.menu,
+                            popup.getMenuInflater().inflate(R.menu.menu_fach,
                                     popup.getMenu());
                             popup.show();
                             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                 @Override
                                 public boolean onMenuItemClick(MenuItem item) {
                                     switch (item.getItemId()) {
-                                        case R.id.info:
-                                            Toast.makeText(context, " Info " + " : " + viewHolder.name.toString(), Toast.LENGTH_LONG).show();
-                                            break;
-                                        case R.id.edit:
-                                            Toast.makeText(context, "Edit " + " : " + position, Toast.LENGTH_LONG).show();
-                                            break;
 
                                         case R.id.delete:
                                             AlertDialog.Builder adb=new AlertDialog.Builder(context);
-                                            adb.setTitle("Delete?");
-                                            adb.setMessage("Are you sure you want to delete " + position);
+                                            adb.setTitle("Fach löschen");
+                                            adb.setMessage("Sind Sie sicher");
                                             final int positionToRemove = position;
                                             adb.setNegativeButton("Cancel", null);
                                             adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
