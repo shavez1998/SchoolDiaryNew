@@ -102,21 +102,7 @@ public class MainActivity extends AppCompatActivity {
                                     if(data.has("email")){
                                         benutzer.setEmail(data.getString("email"));
                                     }
-                                    if(data.has("passwort")){
-                                        benutzer.setPassword(data.getString("passwort"));
-                                    }
-                                    if(data.has("frage")){
-                                        benutzer.setFrage(data.getString("frage"));
-                                    }
-                                    if(data.has("frage2")){
-                                        benutzer.setFrage2(data.getString("frage2"));
-                                    }
-                                    if(data.has("antwort")){
-                                        benutzer.setAntwort(data.getString("antwort"));
-                                    }
-                                    if(data.has("antwort2")){
-                                        benutzer.setAntwort2(data.getString("antwort2"));
-                                    }
+
                                     if(data.has("error")){
                                         showMessage("ERROR","Email oder Passwort falsch!!");
                                         passwortText.setText("");

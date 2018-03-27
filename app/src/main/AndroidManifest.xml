@@ -28,7 +28,6 @@
             android:name=".Noten"
             android:parentActivityName=".Faecher" />
         <activity android:name=".Fach_Info" />
-        <activity android:name=".TestJSON"></activity>
     </application>
 
 </manifest>

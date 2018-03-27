@@ -8,26 +8,18 @@ public class Benutzer {
 
     int benutzer_id;
     String email;
-    String password;
     String vorname;
     String nachname;
-    String frage;
 
-
-
-    String antwort;
-    String frage2;
-    String antwort2;
 
     //Konstruktoren
     public Benutzer(){
         //leer, vielleicht könntest du es brauchen irgendwie
     }
 
-    public Benutzer(int benutzer_id, String email, String password, String vorname, String nachname){
+    public Benutzer(int benutzer_id, String email, String vorname, String nachname){
         this.benutzer_id = benutzer_id;
         this.email = email;
-        this.password = password;
         this.vorname = vorname;
         this.nachname = nachname;
     }
@@ -48,14 +40,6 @@ public class Benutzer {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getVorname() {
         return vorname;
     }
@@ -67,26 +51,6 @@ public class Benutzer {
     public String getNachname() { return nachname; }
 
     public void setNachname(String nachname) { this.nachname = nachname; }
-
-    public String getAntwort() { return antwort;}
-
-    public void setAntwort(String antwort) { this.antwort = antwort;}
-
-    public String getFrage2() { return frage2;}
-
-    public void setFrage2(String frage2) { this.frage2 = frage2;}
-
-    public String getFrage() {
-        return frage;
-    }
-
-    public void setFrage(String frage) {
-        this.frage = frage;
-    }
-
-    public String getAntwort2() { return antwort2; }
-
-    public void setAntwort2(String antwort2) { this.antwort2 = antwort2; }
 
 
 }
