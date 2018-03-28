@@ -93,10 +93,10 @@ public class FachAdapter extends ArrayAdapter<Fach> {
                                         case R.id.delete:
                                             AlertDialog.Builder adb=new AlertDialog.Builder(context);
                                             adb.setTitle("Fach löschen");
-                                            adb.setMessage("Sind Sie sicher");
+                                            adb.setMessage("Sind Sie sicher?");
                                             final int positionToRemove = position;
-                                            adb.setNegativeButton("Cancel", null);
-                                            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                                            adb.setNegativeButton("Nein", null);
+                                            adb.setPositiveButton("Ja", new AlertDialog.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     faecher.fachAdapter.remove(faecher.fachAdapter.getItem(position));
 

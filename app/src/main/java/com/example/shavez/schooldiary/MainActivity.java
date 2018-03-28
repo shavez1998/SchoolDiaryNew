@@ -21,7 +21,6 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
 
     public static Benutzer benutzer;
-    DataSource dataSource;
     Button login;
     Button register;
     EditText emailText;
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dataSource = new DataSource(this);
         benutzer = new Benutzer();
 
         login = (Button) findViewById(R.id.login);
@@ -103,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                 }
-
-
-                //ATEEQ QUERY : EMAIL UND PASSWORD ÜBERPRÜFEN, USER_ID SPEICHERN
             }
         });
 
@@ -123,44 +118,6 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
-    public void getDataBenutzer(Cursor cursor){
-        boolean login = false;
-        String[][] data = new String[cursor.getCount()][5];
-        int idIndex = cursor.getColumnIndex(DatabaseHelper.COL_ID_BENUTZER);
-        int vornameIndex = cursor.getColumnIndex(DatabaseHelper.COL_VORNAME);
-        int nachnameIndex = cursor.getColumnIndex(DatabaseHelper.COL_NACHNAME);
-        //int emailIndex = cursor.getColumnIndex(DatabaseHelper.COL_EMAIL);
-        //int passwortIndex = cursor.getColumnIndex(DatabaseHelper.COL_PASSWORT);
-
-        if (cursor.getCount() == 0) {
-            showMessage("ERROR", "No Data found");
-            Toast.makeText(MainActivity.this,"NO DATA found", Toast.LENGTH_LONG).show();
-           // return;
-        }
-        else {
-            StringBuffer buffer = new StringBuffer();
-
-            while (cursor.moveToNext()) {
-                try {
-                    //if (emailText.getText().toString().equals(cursor.getString(emailIndex)) && passwortText.getText().toString().equals(cursor.getString(passwortIndex)))
-                        login = true;
-                } catch (Exception e){}
-                buffer.append("Id : " + cursor.getString(idIndex) + "\n");
-                buffer.append("Name : " + cursor.getString(vornameIndex) + "\n");
-                buffer.append("Surname : " + cursor.getString(nachnameIndex) + "\n");
-                //buffer.append("Email : " + cursor.getString(emailIndex) + "\n");
-                //buffer.append("Passwort : " + cursor.getString(passwortIndex) + "\n\n");
-            }
-            if(login)
-                showMessage("Data", buffer.toString());
-            else
-                showMessage("Data", "FAILED");
-            dataSource.close();
-        }
-    }
-
-
 
 
 }

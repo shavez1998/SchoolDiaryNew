@@ -13,10 +13,6 @@ public class Bewertung {
     String bewertung_titel;
     String bewertung_date;
 
-    public Bewertung(){
-        //leer brauche?
-    }
-
     public Bewertung(int bewertung_id, float note, String bewertung_titel, String bewertung_date){
         this.bewertung_id = bewertung_id;
         this.note = note;

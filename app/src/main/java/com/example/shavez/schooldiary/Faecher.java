@@ -32,7 +32,7 @@ public class Faecher extends AppCompatActivity {
         ArrayList<Fach> fach = new ArrayList<>();
         fachAdapter = new FachAdapter(this, fach, this);
         listView.setAdapter(fachAdapter);
-        fach = Fach.faecherLaden(); // ATEEQ QUERY: ALLE FÄCHERN AUSGEBEN, DIE ZU DIESEN BENUTZER GEHÖREN MIT HILFE VON USER_ID
+        fach = Fach.faecherLaden();
         listViewLaden(fach);
 
 

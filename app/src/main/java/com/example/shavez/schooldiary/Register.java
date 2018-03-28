@@ -42,48 +42,48 @@ public class Register extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
 
-                                        boolean nichtAusgefuhlt = true;
-                                        if (!vorname.getText().toString().isEmpty())
-                                            if (!nachname.getText().toString().isEmpty())
-                                                if (!email.getText().toString().isEmpty())
-                                                    if (!passwort.getText().toString().isEmpty())
-                                                        nichtAusgefuhlt = false;
+            boolean nichtAusgefuhlt = true;
+            if (!vorname.getText().toString().isEmpty())
+                if (!nachname.getText().toString().isEmpty())
+                    if (!email.getText().toString().isEmpty())
+                        if (!passwort.getText().toString().isEmpty())
+                            nichtAusgefuhlt = false;
 
-                                        if (nichtAusgefuhlt) {
-                                            showMessage("ERROR", "Bitte alle Feldern Ausfühlen");
-                                        } else {
-                                            Client client = new Client();
-                                            String url = "f=checkRegister" + "&e=" + email.getText().toString();
-                                            client.getDaten("registerReceive", url, new JsonHttpResponseHandler() {
-                                                @Override
-                                                public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
-                                                    try {
-                                                        boolean login = true;
-                                                        JSONArray arr;
-                                                        if (response != null) {
-                                                            arr = response.getJSONArray("daten");
-                                                            JSONObject data = arr.getJSONObject(0);
-                                                            if (data.has("create")) {
-                                                                Intent i = new Intent(Register.this, Register2.class);
-                                                                i.putExtra("vorname", vorname.getText().toString());
-                                                                i.putExtra("nachname", nachname.getText().toString());
-                                                                i.putExtra("email", email.getText().toString());
-                                                                i.putExtra("passwort", passwort.getText().toString());
-                                                                startActivity(i);
-                                                            }
-                                                            if (data.has("error")) {
-                                                                showMessage("ERROR", "Email existiert bereits!");
-                                                            }
+            if (nichtAusgefuhlt) {
+                showMessage("ERROR", "Bitte alle Feldern Ausfühlen");
+            } else {
+                Client client = new Client();
+                String url = "f=checkRegister" + "&e=" + email.getText().toString();
+                client.getDaten("registerReceive", url, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                        try {
+                            boolean login = true;
+                            JSONArray arr;
+                            if (response != null) {
+                                arr = response.getJSONArray("daten");
+                                JSONObject data = arr.getJSONObject(0);
+                                if (data.has("create")) {
+                                    Intent i = new Intent(Register.this, Register2.class);
+                                    i.putExtra("vorname", vorname.getText().toString());
+                                    i.putExtra("nachname", nachname.getText().toString());
+                                    i.putExtra("email", email.getText().toString());
+                                    i.putExtra("passwort", passwort.getText().toString());
+                                    startActivity(i);
+                                }
+                                if (data.has("error")) {
+                                    showMessage("ERROR", "Email existiert bereits!");
+                                }
 
-                                                        }
-                                                    } catch (Exception e) {
-                                                        Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    }
-                                });
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+        }
+    });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,27 +95,8 @@ public class Register extends AppCompatActivity {
         });
 
     }
-    public boolean checkIfEmailUsed(Cursor cursor){
-        boolean emailUsed = false;
-        int emailIndex = cursor.getColumnIndex(DatabaseHelper.COL_EMAIL_LOGIN);
-        if (cursor.getCount() == 0) {
-            showMessage("ERROR", "No Data found");
-        }
-        else {
-            while (cursor.moveToNext()) {
-                final String emailDB = cursor.getString(emailIndex).toLowerCase().toString();
-                if(email.getText().toString() == emailDB){
-                    showMessage("ERROR", "EMAIL USED");
-                    emailUsed = true;
-                }
-            }
-        }
-        return emailUsed;
-    }
-    public void insertDataBenutzer(String vorname,String nachname, String email, String passwort){
-        dataSource.insertDataBenutzer(vorname,nachname, email,passwort);
-        Toast.makeText(this,"Registered", Toast.LENGTH_LONG).show();
-    }
+
+
     public  void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);

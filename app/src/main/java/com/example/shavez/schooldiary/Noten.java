@@ -39,14 +39,13 @@ public class Noten extends AppCompatActivity {
         ArrayList<Bewertung> bw = new ArrayList<>();
         notenAdapter = new NotenAdapter(this, bw, this);
         listView.setAdapter(notenAdapter);
-        bewertungen = Bewertung.notenLaden(fach_name); // ATEEQ QUERY: ALLE NOTEN AUSGEBEN, DIE ZU DIESEN BENUTZER GEHÖREN MIT HILFE VON FACH_ID UND USER_ID
+        bewertungen = Bewertung.notenLaden(fach_name);
         listViewLaden(bewertungen);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String suchText = searchText.getText().toString();
-                //ATEEQ QUERY : NOTEN SUCHEN mit TITEL
             }
         });
     }
