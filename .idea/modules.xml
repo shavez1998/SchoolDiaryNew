@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SchoolDiaryNew.iml" filepath="$PROJECT_DIR$/.idea/SchoolDiaryNew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SchoolDiaryNew.iml" filepath="$PROJECT_DIR$/SchoolDiaryNew.iml" />
       <module fileurl="file://C:\Users\Dangerous\AndroidStudioProjects\SchoolDiaryNew\SchoolDiaryNew.iml" filepath="C:\Users\Dangerous\AndroidStudioProjects\SchoolDiaryNew\SchoolDiaryNew.iml" />
       <module fileurl="file://C:\Users\ateeq\Desktop\SchoolDiaryNew\.idea\SchoolDiaryNew.iml" filepath="C:\Users\ateeq\Desktop\SchoolDiaryNew\.idea\SchoolDiaryNew.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

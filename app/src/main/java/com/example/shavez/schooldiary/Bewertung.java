@@ -63,7 +63,7 @@ public class Bewertung {
             try {
                 note += 0.2;
                 note =  Math.round(note * 100)/ 100f;
-                Bewertung f = new Bewertung((i+1), note,"Android Project "+ fach_name, "20.03.2018");
+                Bewertung f = new Bewertung((i+1), note,"Beispiel Note ", "20.03.2018");
                 list.add(f);
             }catch (Exception e){
 

@@ -46,17 +46,38 @@ public class Fach {
 
     public static ArrayList<Fach> faecherLaden(){
         ArrayList<Fach> list = new ArrayList<>();
-        float dnote = 4;
-        for(int i=0; i < 30;i++){
-            try {
-                dnote += 0.2;
-                dnote =  Math.round(dnote * 100)/ 100f;
-                Fach f = new Fach((i+1),"Java "+i, dnote);
-                list.add(f);
-            }catch (Exception e){
+        Fach a = new Fach(234,"Deutsch ", 6);
+        list.add(a);
 
-            }
-        }
+        Fach b = new Fach(234,"Italienisch ",7);
+        list.add(b);
+
+        Fach c = new Fach(234,"Englisch ",9);
+        list.add(c);
+
+        Fach d = new Fach(234,"Geschichte ",Math.round(4.5 * 100)/ 100f);
+        list.add(d);
+
+        Fach e = new Fach(234,"Android ",6);
+        list.add(e);
+
+        Fach f = new Fach(234,"Elektro ",5);
+        list.add(f);
+
+        Fach g = new Fach(234,"RWK ",9);
+        list.add(g);
+
+        Fach h = new Fach(234,"IT ",7);
+        list.add(h);
+
+        Fach i = new Fach(234,"Mathematik ",4);
+        list.add(i);
+
+        Fach j = new Fach(234,"Sport ",8);
+        list.add(j);
+
+
+
         return list;
     }
 

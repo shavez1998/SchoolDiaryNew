@@ -5,10 +5,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import java.net.URLEncoder;
 
-/**
- * Created by Dangerous on 25/03/2018.
- */
-
 public class Client {
 
     private AsyncHttpClient client;
