@@ -56,6 +56,7 @@
         android:ems="11"
         android:hint="Email"
         android:inputType="textPersonName"
+        android:text="ateeq.raja@ymail.com"
         android:textSize="25sp" />
 
     <EditText
@@ -68,6 +69,7 @@
         android:ems="11"
         android:hint="Password"
         android:inputType="textPassword"
+        android:text="Raja786"
         android:textSize="25sp" />
 
     <Button

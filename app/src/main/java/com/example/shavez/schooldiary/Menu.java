@@ -22,7 +22,7 @@ public class Menu extends AppCompatActivity {
         termin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Menu.this, Termin.class);
+                Intent i = new Intent(Menu.this, Terminen.class);
                 startActivity(i);
             }
         });

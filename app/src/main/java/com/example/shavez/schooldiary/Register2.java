@@ -1,6 +1,8 @@
 package com.example.shavez.schooldiary;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -71,24 +73,33 @@ public class Register2 extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    JSONObject json = new JSONObject();
-                    json.put("vorname", vorname);
-                    json.put("nachname", nachname);
-                    json.put("frage", auswahl1);
-                    json.put("antwort", antwort1.getText().toString());
-                    json.put("email", email);
-                    json.put("passwort", passwort);
-                    json.put("frage2", auswahl2);
-                    json.put("antwort2", antwort2.getText().toString());
-                    DatenHochladen t = new DatenHochladen("registerReceive");
-                    t.execute(new JSONObject[]{json});
-                }catch (Exception e){
+                boolean nichtAusgefuhlt = true;
+                if (!antwort1.getText().toString().isEmpty())
+                    if (!antwort2.getText().toString().isEmpty())
+                        nichtAusgefuhlt = false;
 
+                if (nichtAusgefuhlt) {
+                    showMessage("ERROR", "Bitte alle Feldern Ausfühlen");
+                } else {
+                    try {
+                        JSONObject json = new JSONObject();
+                        json.put("vorname", vorname);
+                        json.put("nachname", nachname);
+                        json.put("frage", auswahl1);
+                        json.put("antwort", antwort1.getText().toString());
+                        json.put("email", email);
+                        json.put("passwort", passwort);
+                        json.put("frage2", auswahl2);
+                        json.put("antwort2", antwort2.getText().toString());
+                        DatenHochladen t = new DatenHochladen("registerReceive");
+                        t.execute(new JSONObject[]{json});
+                    } catch (Exception e) {
+
+                    }
+
+                    Intent i = new Intent(Register2.this, MainActivity.class);
+                    startActivity(i);
                 }
-
-                Intent i = new Intent(Register2.this, MainActivity.class);
-                startActivity(i);
             }
         });
         Intent i = getIntent();
@@ -134,6 +145,18 @@ public class Register2 extends AppCompatActivity {
             }
         });
     }
+    public  void showMessage(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        builder.show();
+    }
 
 }

@@ -19,9 +19,10 @@ public class Faecher extends AppCompatActivity {
 
     public ListView listView;
     public FachAdapter fachAdapter;
-    ArrayList<Fach> fach;
     EditText searchText;
     ImageButton searchBtn;
+    ArrayList<Fach> fachArr = new ArrayList<>();
+    public static Faecher faecher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +30,14 @@ public class Faecher extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lvFach);
         searchText = (EditText) findViewById(R.id.fach_search_text);
         searchBtn = (ImageButton) findViewById(R.id.fach_search_btn);
-        ArrayList<Fach> fach = new ArrayList<>();
-        fachAdapter = new FachAdapter(this, fach, this);
+        faecher = this;
+        fachAdapter = new FachAdapter(this, fachArr, this);
         listView.setAdapter(fachAdapter);
-        fach = Fach.faecherLaden();
-        listViewLaden(fach);
+        Fach fach= new Fach();
+        fach.faecherHolenArr();
+        //fachArr = Fach.faecherLaden();
+        Toast.makeText(this,"ARR SIZE " + fachArr.size(), Toast.LENGTH_SHORT).show();
+        listViewLaden(fachArr);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,5 +62,8 @@ public class Faecher extends AppCompatActivity {
         for(Fach f : faecherLaden){
             fachAdapter.add(f);
         }
+    }
+    public void serArrList(){
+        listViewLaden(fachArr);
     }
 }

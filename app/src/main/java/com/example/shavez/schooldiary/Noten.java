@@ -23,6 +23,8 @@ public class Noten extends AppCompatActivity {
     ArrayList<Bewertung> bewertungen;
     EditText searchText;
     ImageButton searchBtn;
+    public static Noten noten;
+    String fach_id ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +33,17 @@ public class Noten extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String fach_name = bundle.get("fach_name").toString();
+        fach_id = bundle.get("fach_id").toString();
         setTitle(fach_name);
-
+        noten = this;
         listView = (ListView) findViewById(R.id.lvNote);
         searchText = (EditText) findViewById(R.id.note_search_text);
         searchBtn = (ImageButton) findViewById(R.id.note_search_btn);
         ArrayList<Bewertung> bw = new ArrayList<>();
         notenAdapter = new NotenAdapter(this, bw, this);
         listView.setAdapter(notenAdapter);
-        bewertungen = Bewertung.notenLaden(fach_name);
-        listViewLaden(bewertungen);
+        Bewertung b = new Bewertung();
+        b.notenHolenArr(fach_id);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,9 @@ public class Noten extends AppCompatActivity {
         for(Bewertung note : noten){
             notenAdapter.add(note);
         }
+    }
+    public void serArrList(){
+        listViewLaden(bewertungen);
     }
 
 }

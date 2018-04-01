@@ -1,7 +1,14 @@
 package com.example.shavez.schooldiary;
 
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -46,13 +53,13 @@ public class Fach {
 
     public static ArrayList<Fach> faecherLaden(){
         ArrayList<Fach> list = new ArrayList<>();
-        Fach a = new Fach(234,"Deutsch ", 6);
+        Fach a = new Fach(1,"Deutsch ", 6);
         list.add(a);
 
         Fach b = new Fach(234,"Italienisch ",7);
         list.add(b);
 
-        Fach c = new Fach(234,"Englisch ",9);
+        Fach c = new Fach(3,"Englisch ",9);
         list.add(c);
 
         Fach d = new Fach(234,"Geschichte ",Math.round(4.5 * 100)/ 100f);
@@ -76,9 +83,54 @@ public class Fach {
         Fach j = new Fach(234,"Sport ",8);
         list.add(j);
 
-
-
         return list;
+    }
+    public Fach fachHolen(JSONObject object){
+
+        Fach fach = new Fach();
+        try {
+            if(object.has("fach_name")){
+                fach.setFach_name(object.getString("fach_name"));
+            }
+            if(object.has("id")){
+                fach.setFach_id(Integer.parseInt(object.getString("id")));
+            }
+            if(object.has("dnote")){
+                float dnote = Float.parseFloat(object.getString("dnote"));
+
+                Log.w("Dnote", ""+dnote);
+                //float dnote1 = Math.round(4.5 * 100)/ 100);;
+                fach.setDurchschnittsnote(Float.parseFloat(""+Math.round(dnote * 10.0)/ 10.0));
+            }
+        }catch (Exception e){
+
+        }
+        return fach;
+    }
+
+    public void faecherHolenArr(){
+        final ArrayList<Fach> list = new ArrayList<Fach>();
+        Client client = new Client();
+        String url = "f=getFach&uid="+MainActivity.benutzer.getBenutzer_id();
+        client.getDaten("faecher",url, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
+                try{
+                    JSONArray arr;
+                    if(response != null){
+                        arr = response.getJSONArray("daten");
+                        for(int i = 0; i < arr.length();i++){
+                            Fach fach = fachHolen(arr.getJSONObject(i));
+                            list.add(fach);
+                        }
+                    }
+                    Faecher.faecher.fachArr = list;
+                    Faecher.faecher.serArrList();
+                } catch (Exception e){ }
+            }
+        });
+        Log.w("ARR", "" + list.size());
+        //return list;
     }
 
 

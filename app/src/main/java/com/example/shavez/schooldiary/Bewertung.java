@@ -1,5 +1,12 @@
 package com.example.shavez.schooldiary;
 
+import android.util.Log;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,6 +20,9 @@ public class Bewertung {
     String bewertung_titel;
     String bewertung_date;
 
+    public Bewertung () {
+
+    }
     public Bewertung(int bewertung_id, float note, String bewertung_titel, String bewertung_date){
         this.bewertung_id = bewertung_id;
         this.note = note;
@@ -66,5 +76,53 @@ public class Bewertung {
             }
         }
         return list;
+    }
+
+    public Bewertung noteHolen(JSONObject object){
+
+        Bewertung note = new Bewertung();
+        try {
+            if(object.has("beschreibung")){
+                note.setBewertung_titel(object.getString("beschreibung"));
+            }
+            if(object.has("id")){
+                note.setBewertung_id(Integer.parseInt(object.getString("id")));
+            }
+            if(object.has("datum")){
+                note.setBewertung_datum(object.getString("datum"));
+            }
+            if(object.has("note")){
+                float n = Float.parseFloat(object.getString("note"));
+                note.setNote(Float.parseFloat(""+Math.round(n * 10.0)/ 10.0));
+            }
+        }catch (Exception e){
+
+        }
+        return note;
+    }
+
+    public void notenHolenArr(String fach_id){
+        final ArrayList<Bewertung> list = new ArrayList<Bewertung>();
+        Client client = new Client();
+        String url = "f=getNoten&uid="+MainActivity.benutzer.getBenutzer_id()+"&fid="+fach_id;
+        client.getDaten("noten",url, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
+                try{
+                    JSONArray arr;
+                    if(response != null){
+                        arr = response.getJSONArray("daten");
+                        for(int i = 0; i < arr.length();i++){
+                            Bewertung note = noteHolen(arr.getJSONObject(i));
+                            list.add(note);
+                        }
+                    }
+                    Noten.noten.bewertungen = list;
+                    Noten.noten.serArrList();
+                } catch (Exception e){ }
+            }
+        });
+        Log.w("ARR", "" + list.size());
+        //return list;
     }
 }

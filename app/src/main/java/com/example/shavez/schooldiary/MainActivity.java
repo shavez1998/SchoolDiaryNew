@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                                     if(data.has("id")){
                                         int id = Integer.parseInt(data.getString("id"));
                                         benutzer.setBenutzer_id(id);
+                                        USER_ID = id;
                                     }
                                     if(data.has("vorname")){
                                         benutzer.setVorname(data.getString("vorname"));

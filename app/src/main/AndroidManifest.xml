@@ -28,7 +28,8 @@
         <activity
             android:name=".Noten"
             android:parentActivityName=".Faecher" />
-        <activity android:name=".Noten_Edit"></activity>
+        <activity android:name=".Noten_Edit" />
+        <activity android:name=".Terminen"></activity>
     </application>
 
 </manifest>
