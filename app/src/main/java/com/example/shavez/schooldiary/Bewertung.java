@@ -117,7 +117,7 @@ public class Bewertung {
                             list.add(note);
                         }
                     }
-                    Noten.noten.bewertungen = list;
+                    Noten.noten.notenArr = list;
                     Noten.noten.serArrList();
                 } catch (Exception e){ }
             }

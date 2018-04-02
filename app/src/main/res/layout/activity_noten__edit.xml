@@ -27,7 +27,8 @@
         android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="Titel"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:maxLength="20"/>
 
     <TextView
         android:id="@+id/LabelDatum"
@@ -49,7 +50,8 @@
         android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="Datum"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:maxLength="20"/>
 
     <TextView
         android:id="@+id/LabelNote"
@@ -71,7 +73,8 @@
         android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="Note"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:maxLength="4"/>
 
     <Button
         android:id="@+id/note_edit_button"

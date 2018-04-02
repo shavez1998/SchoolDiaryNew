@@ -100,7 +100,7 @@ public class Termin {
                             list.add(termin);
                         }
                     }
-                    Terminen.terminen.termin = list;
+                    Terminen.terminen.terminArr = list;
                     Terminen.terminen.serArrList();
                 } catch (Exception e){ }
             }

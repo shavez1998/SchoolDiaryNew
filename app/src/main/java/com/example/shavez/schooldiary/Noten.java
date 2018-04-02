@@ -1,10 +1,11 @@
 package com.example.shavez.schooldiary;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,17 +15,20 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
 import java.util.ArrayList;
 
 public class Noten extends AppCompatActivity {
 
     public ListView listView;
     public NotenAdapter notenAdapter;
-    ArrayList<Bewertung> bewertungen;
-    EditText searchText;
-    ImageButton searchBtn;
+    ArrayList<Bewertung> notenArr;
     public static Noten noten;
     String fach_id ;
+
+    Toolbar toolbar;
+    MaterialSearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,20 +41,59 @@ public class Noten extends AppCompatActivity {
         setTitle(fach_name);
         noten = this;
         listView = (ListView) findViewById(R.id.lvNote);
-        searchText = (EditText) findViewById(R.id.note_search_text);
-        searchBtn = (ImageButton) findViewById(R.id.note_search_btn);
         ArrayList<Bewertung> bw = new ArrayList<>();
         notenAdapter = new NotenAdapter(this, bw, this);
         listView.setAdapter(notenAdapter);
         Bewertung b = new Bewertung();
         b.notenHolenArr(fach_id);
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar_noten);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(fach_name);
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+
+        searchView = (MaterialSearchView) findViewById(R.id.search_view);
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
-            public void onClick(View v) {
-                String suchText = searchText.getText().toString();
+            public void onSearchViewShown() {
+
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+
+                //If closed Search View , lvFach will return default
+                listViewLaden(notenArr);
+
             }
         });
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText != null && !newText.isEmpty() ){
+                    ArrayList<Bewertung> notenFound = new ArrayList<>();
+                    for (Bewertung item: notenArr){
+                        newText = newText.toLowerCase();
+                        String fach_name = item.getBewertung_titel().toLowerCase();
+                        if(fach_name.contains(newText)){
+                            notenFound.add(item);
+                        }
+                    }
+                    listViewLaden(notenFound);
+                }
+                else {
+                    // default Array
+                    listViewLaden(notenArr);
+                }
+                return  true;
+            }
+        });
+
     }
     public void listViewLaden(ArrayList<Bewertung> noten){
         notenAdapter.clear();
@@ -59,7 +102,14 @@ public class Noten extends AppCompatActivity {
         }
     }
     public void serArrList(){
-        listViewLaden(bewertungen);
+        listViewLaden(notenArr);
+    }
+
+    public boolean onCreateOptionsMenu(android.view.Menu menu){
+        getMenuInflater().inflate(R.menu.menu_search,menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        searchView.setMenuItem(item);
+        return  true;
     }
 
 }
