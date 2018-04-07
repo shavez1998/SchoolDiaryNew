@@ -1,5 +1,6 @@
 package com.example.shavez.schooldiary;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,13 +23,15 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 public class Terminen extends AppCompatActivity {
 
     public ListView listView;
     public TerminAdapter terminAdapter;
     ArrayList<Termin> terminArr;
     public static Terminen terminen;
-
+    AlertDialog dialog;
     Toolbar toolbar;
     MaterialSearchView searchView;
 
@@ -109,5 +112,13 @@ public class Terminen extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.action_search);
         searchView.setMenuItem(item);
         return  true;
+    }
+
+    public void proOn(){
+        dialog = new SpotsDialog(this, "Loading");
+        dialog.show();
+    }
+    public void proOff(){
+        dialog.dismiss();
     }
 }

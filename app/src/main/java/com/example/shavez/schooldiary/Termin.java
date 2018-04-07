@@ -85,6 +85,7 @@ public class Termin {
     }
 
     public void terminHolenArr(){
+        Terminen.terminen.proOn();
         final ArrayList<Termin> list = new ArrayList<Termin>();
         Client client = new Client();
         String url = "f=getTerminen&uid="+MainActivity.benutzer.getBenutzer_id();
@@ -102,6 +103,7 @@ public class Termin {
                     }
                     Terminen.terminen.terminArr = list;
                     Terminen.terminen.serArrList();
+                    Terminen.terminen.proOff();
                 } catch (Exception e){ }
             }
         });

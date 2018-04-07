@@ -102,6 +102,7 @@ public class Bewertung {
     }
 
     public void notenHolenArr(String fach_id){
+        Noten.noten.proOn();
         final ArrayList<Bewertung> list = new ArrayList<Bewertung>();
         Client client = new Client();
         String url = "f=getNoten&uid="+MainActivity.benutzer.getBenutzer_id()+"&fid="+fach_id;
@@ -119,10 +120,12 @@ public class Bewertung {
                     }
                     Noten.noten.notenArr = list;
                     Noten.noten.serArrList();
+                    Noten.noten.proOff();
                 } catch (Exception e){ }
             }
         });
         Log.w("ARR", "" + list.size());
         //return list;
     }
+
 }

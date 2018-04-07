@@ -18,9 +18,13 @@ import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import dmax.dialog.SpotsDialog;
+
+
 public class MainActivity extends AppCompatActivity {
 
     public static Benutzer benutzer;
+    android.app.AlertDialog dialog;
     Button login;
     Button register;
     EditText emailText;
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 if(nichtAusgefuhlt){
                     showMessage("ERROR","Bitte alle Feldern Ausfühlen");
                 } else {
-
+                    proOn();
                     Client client = new Client();
                     String url = "f=checkLogin"+"&e="+emailText.getText().toString()+"&p="+passwortText.getText().toString();
                     client.getDaten("benutzer",url, new JsonHttpResponseHandler(){
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 if(login) {
                                     //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                                    proOff();
                                     Intent i = new Intent(MainActivity.this, Menu.class);
                                     startActivity(i);
                                 }
@@ -118,6 +123,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+    public void proOn(){
+        dialog = new SpotsDialog(this, "Loading");
+        dialog.show();
+    }
+    public void proOff(){
+        dialog.dismiss();
     }
 
 

@@ -32,4 +32,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
+
+    compile 'cc.cloudist.acplibrary:library:1.2.1'
+    compile 'com.github.d-max:spots-dialog:0.7@aar'
 }

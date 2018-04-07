@@ -21,6 +21,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 public class Register2 extends AppCompatActivity {
 
     public Spinner frage1, frage2;
@@ -28,6 +30,7 @@ public class Register2 extends AppCompatActivity {
     Button back, register;
     String vorname, nachname, email, passwort;
     String auswahl1, auswahl2;
+    android.app.AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class Register2 extends AppCompatActivity {
                     showMessage("ERROR", "Bitte alle Feldern Ausfühlen");
                 } else {
                     try {
+                        proOn();
                         JSONObject json = new JSONObject();
                         json.put("vorname", vorname);
                         json.put("nachname", nachname);
@@ -93,6 +97,7 @@ public class Register2 extends AppCompatActivity {
                         json.put("antwort2", antwort2.getText().toString());
                         DatenHochladen t = new DatenHochladen("registerReceive");
                         t.execute(new JSONObject[]{json});
+                        proOff();
                     } catch (Exception e) {
 
                     }
@@ -111,6 +116,7 @@ public class Register2 extends AppCompatActivity {
     }
 
     public void getFragen(){
+        proOn();
         final ArrayList<String> frage_arr = new ArrayList<String>();
         final ArrayList<String> frage_arr1 = new ArrayList<String>();
         Client client = new Client();
@@ -138,7 +144,7 @@ public class Register2 extends AppCompatActivity {
                             android.R.layout.simple_spinner_item, frage_arr1);
                     frage1.setAdapter(adapter);
                     frage2.setAdapter(adapter1);
-
+                    proOff();
                 } catch (Exception e){
                     Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
                 }
@@ -157,6 +163,14 @@ public class Register2 extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    public void proOn(){
+        dialog = new SpotsDialog(this, "Loading");
+        dialog.show();
+    }
+    public void proOff(){
+        dialog.dismiss();
     }
 
 }

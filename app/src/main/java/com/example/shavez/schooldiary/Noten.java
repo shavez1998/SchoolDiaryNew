@@ -1,5 +1,6 @@
 package com.example.shavez.schooldiary;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 public class Noten extends AppCompatActivity {
 
     public ListView listView;
@@ -26,7 +29,7 @@ public class Noten extends AppCompatActivity {
     ArrayList<Bewertung> notenArr;
     public static Noten noten;
     String fach_id ;
-
+    AlertDialog dialog;
     Toolbar toolbar;
     MaterialSearchView searchView;
     @Override
@@ -110,6 +113,14 @@ public class Noten extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.action_search);
         searchView.setMenuItem(item);
         return  true;
+    }
+
+    public void proOn(){
+        dialog = new SpotsDialog(this, "Loading");
+        dialog.show();
+    }
+    public void proOff(){
+        dialog.dismiss();
     }
 
 }

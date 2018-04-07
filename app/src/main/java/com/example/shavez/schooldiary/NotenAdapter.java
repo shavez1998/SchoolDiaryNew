@@ -100,7 +100,6 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
                                         i.putExtra("datum", noten.notenAdapter.getItem(position).getBewertung_datum());
                                         i.putExtra("note", noten.notenAdapter.getItem(position).getNote()+"");
                                         startActivity(context, i, null);
-                                        Toast.makeText(context, "Edit " + " : " + position, Toast.LENGTH_LONG).show();
                                         break;
 
                                     case R.id.delete:

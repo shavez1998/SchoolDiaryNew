@@ -1,5 +1,6 @@
 package com.example.shavez.schooldiary;
 
+import android.app.AlertDialog;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by ateeq on 02/03/2018.
@@ -108,10 +111,13 @@ public class Fach {
         return fach;
     }
 
-    public void faecherHolenArr(){
+    public void faecherHolenArr(Faecher faecher){
+
+        Faecher.faecher.proOn();
         final ArrayList<Fach> list = new ArrayList<Fach>();
         Client client = new Client();
         String url = "f=getFach&uid="+MainActivity.benutzer.getBenutzer_id();
+        //start
         client.getDaten("faecher",url, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
@@ -126,10 +132,12 @@ public class Fach {
                     }
                     Faecher.faecher.fachArr = list;
                     Faecher.faecher.serArrList();
+                    Faecher.faecher.proOff();
+                    //end
+                   // dialog.dismiss();
                 } catch (Exception e){ }
             }
         });
-        Log.w("ARR", "" + list.size());
         //return list;
     }
 

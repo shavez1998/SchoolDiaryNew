@@ -1,5 +1,6 @@
 package com.example.shavez.schooldiary;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
+
 public class Faecher extends AppCompatActivity {
 
     public ListView listView;
@@ -40,7 +43,7 @@ public class Faecher extends AppCompatActivity {
         fachAdapter = new FachAdapter(this, fachArr, this);
         listView.setAdapter(fachAdapter);
         Fach fach= new Fach();
-        fach.faecherHolenArr();
+        fach.faecherHolenArr(this);
         Toast.makeText(this,"ARR SIZE " + fachArr.size(), Toast.LENGTH_SHORT).show();
         listViewLaden(fachArr);
 
@@ -118,5 +121,13 @@ public class Faecher extends AppCompatActivity {
        MenuItem item = menu.findItem(R.id.action_search);
        searchView.setMenuItem(item);
        return  true;
+    }
+    AlertDialog dialog;
+    public void proOn(){
+        dialog = new SpotsDialog(this, "Loading");
+        dialog.show();
+    }
+    public void proOff(){
+        dialog.dismiss();
     }
 }

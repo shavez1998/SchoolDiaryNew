@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 import static com.example.shavez.schooldiary.MainActivity.benutzer;
 
 public class Register extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class Register extends AppCompatActivity {
     EditText vorname,nachname,email,passwort;
     Button next,cancel;
     DataSource dataSource;
+    android.app.AlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,6 @@ public class Register extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-
             boolean nichtAusgefuhlt = true;
             if (!vorname.getText().toString().isEmpty())
                 if (!nachname.getText().toString().isEmpty())
@@ -52,6 +54,7 @@ public class Register extends AppCompatActivity {
             if (nichtAusgefuhlt) {
                 showMessage("ERROR", "Bitte alle Feldern Ausfühlen");
             } else {
+                proOn();
                 Client client = new Client();
                 String url = "f=checkRegister" + "&e=" + email.getText().toString();
                 client.getDaten("registerReceive", url, new JsonHttpResponseHandler() {
@@ -76,6 +79,7 @@ public class Register extends AppCompatActivity {
                                 }
 
                             }
+                            proOff();
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
                         }
@@ -87,7 +91,7 @@ public class Register extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Register.this,"Canceled", Toast.LENGTH_LONG).show();
+                //Toast.makeText(Register.this,"Canceled", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(Register.this, MainActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -109,6 +113,14 @@ public class Register extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    public void proOn(){
+        dialog = new SpotsDialog(this, "Loading");
+        dialog.show();
+    }
+    public void proOff(){
+        dialog.dismiss();
     }
 
 
