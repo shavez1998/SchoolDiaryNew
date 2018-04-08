@@ -3,9 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SchoolDiaryNew.iml" filepath="$PROJECT_DIR$/.idea/SchoolDiaryNew.iml" />
-      <module fileurl="file://C:/Dangerous/AndroidStudioProjects/SchoolDiaryNew/SchoolDiaryNew.iml" filepath="C:/Dangerous/AndroidStudioProjects/SchoolDiaryNew/SchoolDiaryNew.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../../Dangerous/AndroidStudioProjects/SchoolDiaryNew/SchoolDiaryNew.iml" filepath="$PROJECT_DIR$/../../../../Dangerous/AndroidStudioProjects/SchoolDiaryNew/SchoolDiaryNew.iml" />
-      <module fileurl="file://C:/ateeq/Desktop/SchoolDiaryNew/.idea/SchoolDiaryNew.iml" filepath="C:/ateeq/Desktop/SchoolDiaryNew/.idea/SchoolDiaryNew.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

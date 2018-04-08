@@ -95,7 +95,7 @@ public class Register2 extends AppCompatActivity {
                         json.put("passwort", passwort);
                         json.put("frage2", auswahl2);
                         json.put("antwort2", antwort2.getText().toString());
-                        DatenHochladen t = new DatenHochladen("registerReceive");
+                        DatenHochladen t = new DatenHochladen("registerReceive","json");
                         t.execute(new JSONObject[]{json});
                         proOff();
                     } catch (Exception e) {

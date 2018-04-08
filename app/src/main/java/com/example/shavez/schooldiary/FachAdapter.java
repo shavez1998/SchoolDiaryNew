@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -91,17 +94,34 @@ public class FachAdapter extends ArrayAdapter<Fach> {
                                     switch (item.getItemId()) {
 
                                         case R.id.delete:
+                                                for(int i = 0; i < faecher.fachAdapter.getCount(); i++){
+                                                    Log.e("INFO ", "INF " + position  + " " + faecher.fachAdapter.getItem(i).getFach_name() + "   " + faecher.fachAdapter.getItem(i).getFach_id());
+                                                }
+                                                Log.e("INFO ", "Sind Sie sicher? " + position  + " " + faecher.fachAdapter.getItem(position).getFach_name() + "   " + faecher.fachAdapter.getItem(position).getFach_id());
+
+
                                             AlertDialog.Builder adb=new AlertDialog.Builder(context);
                                             adb.setTitle("Fach löschen");
-                                            adb.setMessage("Sind Sie sicher?");
+                                            adb.setMessage("Sind Sie sicher? " + position  + " " + faecher.fachAdapter.getItem(position).getFach_name() + "   " + faecher.fachAdapter.getItem(position).getFach_id());
                                             final int positionToRemove = position;
                                             adb.setNegativeButton("Nein", null);
                                             adb.setPositiveButton("Ja", new AlertDialog.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int which) {
+                                                 try {
+                                                    faecher.proOn();
+                                                    JSONObject json = new JSONObject();
+                                                    json.put("fachID", "" + faecher.fachAdapter.getItem(position).getFach_id());
+                                                    json.put("fachName", "" + faecher.fachAdapter.getItem(position).getFach_name());
+                                                    json.put("userID", "" + MainActivity.benutzer.getBenutzer_id());
+                                                    DatenHochladen t = new DatenHochladen("faecher","delFach");
+                                                    t.execute(new JSONObject[]{json});
                                                     faecher.fachAdapter.remove(faecher.fachAdapter.getItem(position));
+                                                    faecher.proOff();
+                                                } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
 
                                                 }});
                                             adb.show();
+
                                             break;
 
                                         default:

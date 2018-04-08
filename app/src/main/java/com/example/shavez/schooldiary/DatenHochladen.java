@@ -15,9 +15,11 @@ import android.widget.Toast;
 public class DatenHochladen extends AsyncTask<JSONObject, JSONObject, JSONObject> {
 
     String url ="";
+    String obj;
     String r = "";
-    public DatenHochladen(String file_name){
+    public DatenHochladen(String file_name, String obj_name){
        this.url = "https://gamifygames.000webhostapp.com/SchoolDiary/"+file_name+".php";
+       obj = obj_name;
     }
     @Override
     protected JSONObject doInBackground(JSONObject... data) {
@@ -29,7 +31,7 @@ public class DatenHochladen extends AsyncTask<JSONObject, JSONObject, JSONObject
         HttpPost post = new HttpPost(url);
         try {
             Log.w("JSON", json.toString());
-            StringEntity se = new StringEntity("json="+json.toString());
+            StringEntity se = new StringEntity(obj+"="+json.toString());
             post.addHeader("content-type", "application/x-www-form-urlencoded");
             post.setEntity(se);
 
@@ -37,7 +39,8 @@ public class DatenHochladen extends AsyncTask<JSONObject, JSONObject, JSONObject
             response = client.execute(post);
             String resFromServer = org.apache.http.util.EntityUtils.toString(response.getEntity());
             r = resFromServer;
-        } catch (Exception e) { e.printStackTrace();}
+            Log.w("JSONRES", r);
+        } catch (Exception e) {Log.w("JSON1", r); e.printStackTrace();}
 
         return jsonResponse;
     }

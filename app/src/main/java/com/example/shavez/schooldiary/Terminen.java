@@ -2,6 +2,8 @@ package com.example.shavez.schooldiary;
 
 import android.app.AlertDialog;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -76,7 +78,7 @@ public class Terminen extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(newText != null && !newText.isEmpty() ){
+                if(newText != null && !newText.isEmpty()){
                     ArrayList<Termin> terminFound = new ArrayList<>();
                     for (Termin item: terminArr){
                         newText = newText.toLowerCase();

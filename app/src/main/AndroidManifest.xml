@@ -30,7 +30,7 @@
             android:parentActivityName=".Faecher" />
         <activity android:name=".Noten_Edit" />
         <activity android:name=".Terminen" />
-        <activity android:name=".Processbar"></activity>
+        <activity android:name=".Processbar" />
     </application>
 
 </manifest>

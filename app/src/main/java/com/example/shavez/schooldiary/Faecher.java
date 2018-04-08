@@ -1,6 +1,7 @@
 package com.example.shavez.schooldiary;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import android.view.Menu;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +31,8 @@ import dmax.dialog.SpotsDialog;
 public class Faecher extends AppCompatActivity {
 
     public ListView listView;
+    public  Button addFach;
+    EditText fachname;
     public FachAdapter fachAdapter;
     ArrayList<Fach> fachArr = new ArrayList<>();
     public static Faecher faecher;
@@ -39,12 +44,12 @@ public class Faecher extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faecher);
         listView = (ListView) findViewById(R.id.lvFach);
+        addFach = (Button) findViewById(R.id.addFach);
         faecher = this;
         fachAdapter = new FachAdapter(this, fachArr, this);
         listView.setAdapter(fachAdapter);
         Fach fach= new Fach();
         fach.faecherHolenArr(this);
-        Toast.makeText(this,"ARR SIZE " + fachArr.size(), Toast.LENGTH_SHORT).show();
         listViewLaden(fachArr);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_fach);
@@ -94,6 +99,44 @@ public class Faecher extends AppCompatActivity {
             }
         });
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Fach Hinzufügen");
+        builder.setMessage("Fachname eingeben!");
+
+        fachname = new EditText(this);
+        builder.setView(fachname);
+
+        builder.setPositiveButton("Hinzufügen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                String txt = fachname.getText().toString();
+                try {
+                    proOn();
+                    JSONObject json = new JSONObject();
+                    json.put("fachname", txt);
+                    json.put("uid", MainActivity.benutzer.getBenutzer_id());
+                    DatenHochladen t = new DatenHochladen("faecher","addFach");
+                    t.execute(new JSONObject[]{json});
+                    proOff();
+                    new Fach().faecherHolenArr(Faecher.this);
+                    Toast.makeText(getApplicationContext(),txt,Toast.LENGTH_SHORT).show();
+                } catch (Exception e){ }
+            }
+        });
+        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),"Abbrechen",Toast.LENGTH_SHORT).show();
+                dialogInterface.dismiss();
+            }
+        });
+        final AlertDialog ad = builder.create();
+        addFach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.show();
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,6 +147,9 @@ public class Faecher extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+
     }
     public void listViewLaden(ArrayList<Fach> faecherLaden){
         fachAdapter.clear();
