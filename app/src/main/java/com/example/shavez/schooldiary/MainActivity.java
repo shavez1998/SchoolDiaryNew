@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                                 nichtAusgefuhlt = false;
 
                 if(nichtAusgefuhlt){
+                    Intent i = new Intent(MainActivity.this, Menu.class);
+                    startActivity(i);
                     showMessage("ERROR","Bitte alle Feldern Ausfühlen");
                 } else {
                     proOn();
@@ -130,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void proOff(){
         dialog.dismiss();
+
     }
 
 

@@ -35,4 +35,5 @@ dependencies {
 
     compile 'cc.cloudist.acplibrary:library:1.2.1'
     compile 'com.github.d-max:spots-dialog:0.7@aar'
+    compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
 }

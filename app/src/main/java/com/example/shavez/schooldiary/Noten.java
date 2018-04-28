@@ -25,6 +25,7 @@ import dmax.dialog.SpotsDialog;
 public class Noten extends AppCompatActivity {
 
     public ListView listView;
+    public Button addNote;
     public NotenAdapter notenAdapter;
     ArrayList<Bewertung> notenArr;
     public static Noten noten;
@@ -44,12 +45,21 @@ public class Noten extends AppCompatActivity {
         setTitle(fach_name);
         noten = this;
         listView = (ListView) findViewById(R.id.lvNote);
+        addNote = (Button) findViewById(R.id.addNote);
         ArrayList<Bewertung> bw = new ArrayList<>();
         notenAdapter = new NotenAdapter(this, bw, this);
         listView.setAdapter(notenAdapter);
         Bewertung b = new Bewertung();
         b.notenHolenArr(fach_id);
 
+        addNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Noten.this, Noten_Add.class);
+                i.putExtra("fach_id", fach_id);
+                startActivity(i);
+            }
+        });
         toolbar = (Toolbar) findViewById(R.id.toolbar_noten);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(fach_name);

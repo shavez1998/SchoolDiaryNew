@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shavez.schooldiary.Noten_Edit">
+    tools:context="com.example.shavez.schooldiary.Noten_Add">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_noten_edit"
+        android:id="@+id/toolbar_noten_add"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -15,7 +15,7 @@
 
     <TextView
         android:id="@+id/labelTitel"
-        android:layout_below="@+id/toolbar_noten_edit"
+        android:layout_below="@+id/toolbar_noten_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -27,7 +27,7 @@
         />
 
     <EditText
-        android:id="@+id/note_edit_titel"
+        android:id="@+id/note_add_titel"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/labelTitel"
@@ -42,15 +42,15 @@
         android:id="@+id/LabelDatum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/note_edit_titel"
-        android:layout_below="@+id/note_edit_titel"
+        android:layout_alignStart="@+id/note_add_titel"
+        android:layout_below="@+id/note_add_titel"
         android:layout_marginTop="17dp"
         android:text="Datum"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/note_edit_datum"
+        android:id="@+id/note_add_datum"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/LabelDatum"
@@ -65,15 +65,15 @@
         android:id="@+id/LabelNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/note_edit_datum"
-        android:layout_below="@+id/note_edit_datum"
+        android:layout_alignStart="@+id/note_add_datum"
+        android:layout_below="@+id/note_add_datum"
         android:layout_marginTop="17dp"
         android:text="Note"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/note_edit_note"
+        android:id="@+id/note_add_note"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/LabelNote"
@@ -85,12 +85,13 @@
         android:maxLength="4"/>
 
     <Button
-        android:id="@+id/note_edit_button"
+        android:id="@+id/note_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="114dp"
-        android:text="Save"
+        android:text="Hinzufügen"
         android:textSize="24sp" />
+
 </RelativeLayout>

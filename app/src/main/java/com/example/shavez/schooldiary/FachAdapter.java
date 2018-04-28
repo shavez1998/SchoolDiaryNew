@@ -102,7 +102,7 @@ public class FachAdapter extends ArrayAdapter<Fach> {
 
                                             AlertDialog.Builder adb=new AlertDialog.Builder(context);
                                             adb.setTitle("Fach löschen");
-                                            adb.setMessage("Sind Sie sicher? " + position  + " " + faecher.fachAdapter.getItem(position).getFach_name() + "   " + faecher.fachAdapter.getItem(position).getFach_id());
+                                            adb.setMessage("Sind Sie sicher?");
                                             final int positionToRemove = position;
                                             adb.setNegativeButton("Nein", null);
                                             adb.setPositiveButton("Ja", new AlertDialog.OnClickListener() {
@@ -111,7 +111,6 @@ public class FachAdapter extends ArrayAdapter<Fach> {
                                                     faecher.proOn();
                                                     JSONObject json = new JSONObject();
                                                     json.put("fachID", "" + faecher.fachAdapter.getItem(position).getFach_id());
-                                                    json.put("fachName", "" + faecher.fachAdapter.getItem(position).getFach_name());
                                                     json.put("userID", "" + MainActivity.benutzer.getBenutzer_id());
                                                     DatenHochladen t = new DatenHochladen("faecher","delFach");
                                                     t.execute(new JSONObject[]{json});

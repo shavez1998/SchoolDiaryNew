@@ -17,6 +17,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import static android.support.v4.content.ContextCompat.startActivity;
@@ -66,7 +68,7 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
         viewHolder.datum.setText(bewertung.getBewertung_datum());
         vHolder = viewHolder;
 
-        int note_ohne_komma = (int) bewertung.getNote();
+        final int note_ohne_komma = (int) bewertung.getNote();
         if(bewertung.getNote() >= 10.0){
             viewHolder.note.setText("" + note_ohne_komma);
         }else{
@@ -95,7 +97,8 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
                                 switch (item.getItemId()) {
                                     case R.id.edit:
                                         Intent i = new Intent(noten.getApplicationContext(),Noten_Edit.class);
-                                        i.putExtra("id", position);
+                                        i.putExtra("note_id", "" + noten.notenAdapter.getItem(position).getBewertung_id());
+                                        i.putExtra("fach_id", "" + noten.fach_id);
                                         i.putExtra("titel", noten.notenAdapter.getItem(position).getBewertung_titel());
                                         i.putExtra("datum", noten.notenAdapter.getItem(position).getBewertung_datum());
                                         i.putExtra("note", noten.notenAdapter.getItem(position).getNote()+"");
@@ -104,12 +107,23 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
 
                                     case R.id.delete:
                                         AlertDialog.Builder adb=new AlertDialog.Builder(context);
-                                        adb.setTitle("Delete?");
-                                        adb.setMessage("Are you sure you want to delete " + position);
-                                        adb.setNegativeButton("Cancel", null);
-                                        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                                        adb.setTitle("Fach löschen");
+                                        adb.setMessage("Sind Sie sicher?" + position);
+                                        adb.setNegativeButton("Nein", null);
+                                        adb.setPositiveButton("Ja", new AlertDialog.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
-                                                noten.notenAdapter.remove(noten.notenAdapter.getItem(position));
+
+                                                try {
+                                                    noten.proOn();
+                                                    JSONObject json = new JSONObject();
+                                                    json.put("id", "" + noten.notenAdapter.getItem(position).getBewertung_id());
+                                                    DatenHochladen t = new DatenHochladen("noten", "deleteNote");
+                                                    t.execute(new JSONObject[]{json});
+                                                    noten.notenAdapter.remove(noten.notenAdapter.getItem(position));
+                                                    noten.proOff();
+                                                } catch (Exception e) {
+
+                                                }
 
                                             }});
                                         adb.show();

@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.baoyz.widget.PullRefreshLayout;
 
 import org.json.JSONObject;
 
@@ -39,6 +40,8 @@ public class Faecher extends AppCompatActivity {
 
     Toolbar toolbar;
     MaterialSearchView searchView;
+    PullRefreshLayout refreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,8 @@ public class Faecher extends AppCompatActivity {
         listView.setAdapter(fachAdapter);
         Fach fach= new Fach();
         fach.faecherHolenArr(this);
-        listViewLaden(fachArr);
+        //listViewLaden(fachArr);
+        Fach.faecherLaden();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_fach);
         setSupportActionBar(toolbar);
@@ -96,6 +100,20 @@ public class Faecher extends AppCompatActivity {
                     listViewLaden(fachArr);
                 }
                 return  true;
+            }
+        });
+
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),"REFRESH",Toast.LENGTH_SHORT).show();
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
             }
         });
 

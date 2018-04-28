@@ -124,7 +124,6 @@ public class Bewertung {
                 } catch (Exception e){ }
             }
         });
-        Log.w("ARR", "" + list.size());
         //return list;
     }
 

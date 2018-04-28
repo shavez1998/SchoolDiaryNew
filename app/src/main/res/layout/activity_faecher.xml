@@ -27,27 +27,34 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         />
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" >
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="470dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar_fach"
-        android:id="@+id/lvFach"
-        android:divider="#FFFFFF"
-        android:dividerHeight="5dp"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="470dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/toolbar_fach"
+            android:id="@+id/lvFach"
+            android:divider="#FFFFFF"
+            android:dividerHeight="5dp"/>
 
-    <Button
-        android:id="@+id/addFach"
-        android:layout_width="230sp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/lvFach"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        <Button
+            android:id="@+id/addFach"
+            android:layout_width="230sp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/lvFach"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
 
-        android:text="Fach Hinzufügen"
-        android:textAllCaps="false"
-        android:textSize="24sp" />
+            android:text="Fach Hinzufügen"
+            android:textAllCaps="false"
+            android:textSize="24sp" />
+
+    </com.baoyz.widget.PullRefreshLayout>
+
 
 </RelativeLayout>
 
