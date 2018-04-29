@@ -68,12 +68,7 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
         viewHolder.datum.setText(bewertung.getBewertung_datum());
         vHolder = viewHolder;
 
-        final int note_ohne_komma = (int) bewertung.getNote();
-        if(bewertung.getNote() >= 10.0){
-            viewHolder.note.setText("" + note_ohne_komma);
-        }else{
             viewHolder.note.setText("" + bewertung.getNote());
-        }
         if(bewertung.getNote() < 6){
             int red = Color.parseColor("#FFE7442E");
             viewHolder.note_foto.setBackgroundColor(red);

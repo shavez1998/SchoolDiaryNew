@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class Terminen extends AppCompatActivity {
     AlertDialog dialog;
     Toolbar toolbar;
     MaterialSearchView searchView;
+    PullRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class Terminen extends AppCompatActivity {
         terminAdapter = new TerminAdapter(this, t, this);
         listView.setAdapter(terminAdapter);
         Termin t1 = new Termin();
-        t1.terminHolenArr();
+        t1.terminHolenArr(true);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_termin);
         setSupportActionBar(toolbar);
@@ -96,7 +98,19 @@ public class Terminen extends AppCompatActivity {
                 return  true;
             }
         });
+
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getApplicationContext(),"REFRESH GO",Toast.LENGTH_SHORT).show();
+                new Termin().terminHolenArr(false);
+                refreshLayout.setRefreshing(false);
+
+            }
+        });
     }
+
 
     public void listViewLaden(ArrayList<Termin> t) {
         terminAdapter.clear();

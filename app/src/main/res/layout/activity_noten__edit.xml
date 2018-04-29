@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shavez.schooldiary.Noten_Edit">
+    tools:context="com.example.shavez.schooldiary.Noten_Add">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_noten_edit"
@@ -39,40 +39,17 @@
         android:maxLength="20"/>
 
     <TextView
-        android:id="@+id/LabelDatum"
+        android:id="@+id/LabelNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/note_edit_titel"
         android:layout_below="@+id/note_edit_titel"
         android:layout_marginTop="17dp"
-        android:text="Datum"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/note_edit_datum"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/LabelDatum"
-        android:layout_below="@+id/LabelDatum"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="Datum"
-        android:inputType="textPersonName"
-        android:maxLength="20"/>
-
-    <TextView
-        android:id="@+id/LabelNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/note_edit_datum"
-        android:layout_below="@+id/note_edit_datum"
-        android:layout_marginTop="17dp"
         android:text="Note"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/note_edit_note"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
@@ -80,9 +57,28 @@
         android:layout_below="@+id/LabelNote"
         android:layout_marginTop="17dp"
         android:ems="10"
-        android:hint="Note"
-        android:inputType="textPersonName"
-        android:maxLength="4"/>
+        android:text="Note Auswählen"/>
+
+    <TextView
+        android:id="@+id/LabelDatum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/note_edit_note"
+        android:layout_below="@+id/note_edit_note"
+        android:layout_marginTop="17dp"
+        android:text="Datum"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/note_edit_datum"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/LabelDatum"
+        android:layout_below="@+id/LabelDatum"
+        android:layout_marginTop="17dp"
+        android:text="Datum Auswählen"/>
+
 
     <Button
         android:id="@+id/note_edit_button"
@@ -91,6 +87,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="114dp"
-        android:text="Save"
+        android:text="Speichern"
         android:textSize="24sp" />
+
 </RelativeLayout>

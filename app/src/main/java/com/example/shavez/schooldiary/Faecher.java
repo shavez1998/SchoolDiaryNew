@@ -35,7 +35,7 @@ public class Faecher extends AppCompatActivity {
     public  Button addFach;
     EditText fachname;
     public FachAdapter fachAdapter;
-    ArrayList<Fach> fachArr = new ArrayList<>();
+    public static  ArrayList<Fach> fachArr = new ArrayList<>();
     public static Faecher faecher;
 
     Toolbar toolbar;
@@ -51,11 +51,12 @@ public class Faecher extends AppCompatActivity {
         faecher = this;
         fachAdapter = new FachAdapter(this, fachArr, this);
         listView.setAdapter(fachAdapter);
+        proOn();
         Fach fach= new Fach();
-        fach.faecherHolenArr(this);
-        //listViewLaden(fachArr);
-        Fach.faecherLaden();
-
+        new Fach().faecherHolenArr();
+        proOff();
+        //fachArr = Fach.faecherLaden();
+        listViewLaden(fachArr);
         toolbar = (Toolbar) findViewById(R.id.toolbar_fach);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Fächer");
@@ -107,13 +108,10 @@ public class Faecher extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),"REFRESH",Toast.LENGTH_SHORT).show();
-                        refreshLayout.setRefreshing(false);
-                    }
-                }, 3000);
+                Toast.makeText(getApplicationContext(),"REFRESH GO",Toast.LENGTH_SHORT).show();
+                new Fach().faecherHolenArr();
+                refreshLayout.setRefreshing(false);
+
             }
         });
 
@@ -136,7 +134,7 @@ public class Faecher extends AppCompatActivity {
                     DatenHochladen t = new DatenHochladen("faecher","addFach");
                     t.execute(new JSONObject[]{json});
                     proOff();
-                    new Fach().faecherHolenArr(Faecher.this);
+
                     Toast.makeText(getApplicationContext(),txt,Toast.LENGTH_SHORT).show();
                 } catch (Exception e){ }
             }

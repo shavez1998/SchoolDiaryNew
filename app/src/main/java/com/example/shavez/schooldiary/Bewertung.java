@@ -89,11 +89,13 @@ public class Bewertung {
                 note.setBewertung_id(Integer.parseInt(object.getString("id")));
             }
             if(object.has("datum")){
-                note.setBewertung_datum(object.getString("datum"));
+                String[] datumArr = object.getString("datum").split("-");
+
+                note.setBewertung_datum(datumArr[2]+"."+datumArr[1]+"."+datumArr[0]);
             }
             if(object.has("note")){
                 float n = Float.parseFloat(object.getString("note"));
-                note.setNote(Float.parseFloat(""+Math.round(n * 10.0)/ 10.0));
+                note.setNote(n);
             }
         }catch (Exception e){
 

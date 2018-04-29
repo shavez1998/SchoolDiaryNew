@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import dmax.dialog.SpotsDialog;
 
 
@@ -29,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     Button register;
     EditText emailText;
     EditText passwortText;
-    public static int USER_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                                     if(data.has("id")){
                                         int id = Integer.parseInt(data.getString("id"));
                                         benutzer.setBenutzer_id(id);
-                                        USER_ID = id;
                                     }
                                     if(data.has("vorname")){
                                         benutzer.setVorname(data.getString("vorname"));
@@ -97,13 +98,17 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                                 if(login) {
-                                    //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+
                                     proOff();
+                                    //new Fach().faecherHolenArr();
+                                    Log.e("LIST LEN", "TEST");
                                     Intent i = new Intent(MainActivity.this, Menu.class);
                                     startActivity(i);
                                 }
                             } catch (Exception e){
                                 Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
+                                //new Fach().faecherHolenArr();
+                               // Log.e("LIST LEN", ""+ Fach.list.size());
                             }
                         }
                     });
@@ -130,8 +135,9 @@ public class MainActivity extends AppCompatActivity {
         dialog = new SpotsDialog(this, "Loading");
         dialog.show();
     }
-    public void proOff(){
-        dialog.dismiss();
+    public void proOff(){  dialog.dismiss(); }
+
+    public void FachArrFuellen(){
 
     }
 

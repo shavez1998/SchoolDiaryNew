@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -80,6 +83,7 @@ public class TerminAdapter extends ArrayAdapter<Termin> {
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()) {
                                     case R.id.edit:
+
                                         /*Intent i = new Intent(noten.getApplicationContext(),Noten_Edit.class);
                                         i.putExtra("id", position);
                                         i.putExtra("titel", noten.notenAdapter.getItem(position).getBewertung_titel());
@@ -91,12 +95,22 @@ public class TerminAdapter extends ArrayAdapter<Termin> {
 
                                     case R.id.delete:
                                         AlertDialog.Builder adb=new AlertDialog.Builder(context);
-                                        adb.setTitle("Delete?");
-                                        adb.setMessage("Are you sure you want to delete " + position);
-                                        adb.setNegativeButton("Cancel", null);
-                                        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                                        adb.setTitle("Termin löschen");
+                                        adb.setMessage("Sind Sie sicher?");
+                                        final int positionToRemove = position;
+                                        adb.setNegativeButton("Nein", null);
+                                        adb.setPositiveButton("Ja", new AlertDialog.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
-                                                terminen.terminAdapter.remove(terminen.terminAdapter.getItem(position));
+                                                try {
+                                                    terminen.proOn();
+                                                    JSONObject json = new JSONObject();
+                                                    json.put("fachID", "" + terminen.terminAdapter.getItem(position).getTermin_id());
+                                                    json.put("userID", "" + MainActivity.benutzer.getBenutzer_id());
+                                                    DatenHochladen t = new DatenHochladen("terminen","delTermin");
+                                                    t.execute(new JSONObject[]{json});
+                                                    terminen.terminAdapter.remove(terminen.terminAdapter.getItem(position));
+                                                    terminen.proOff();
+                                                } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
 
                                             }});
                                         adb.show();

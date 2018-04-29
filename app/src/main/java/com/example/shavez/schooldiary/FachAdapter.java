@@ -94,10 +94,6 @@ public class FachAdapter extends ArrayAdapter<Fach> {
                                     switch (item.getItemId()) {
 
                                         case R.id.delete:
-                                                for(int i = 0; i < faecher.fachAdapter.getCount(); i++){
-                                                    Log.e("INFO ", "INF " + position  + " " + faecher.fachAdapter.getItem(i).getFach_name() + "   " + faecher.fachAdapter.getItem(i).getFach_id());
-                                                }
-                                                Log.e("INFO ", "Sind Sie sicher? " + position  + " " + faecher.fachAdapter.getItem(position).getFach_name() + "   " + faecher.fachAdapter.getItem(position).getFach_id());
 
 
                                             AlertDialog.Builder adb=new AlertDialog.Builder(context);

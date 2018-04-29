@@ -111,9 +111,9 @@ public class Fach {
         return fach;
     }
 
-    public void faecherHolenArr(Faecher faecher){
+    public void faecherHolenArr(){
 
-        Faecher.faecher.proOn();
+        //Faecher.faecher.proOn();
         final ArrayList<Fach> list = new ArrayList<Fach>();
         Client client = new Client();
         String url = "f=getFach&uid="+MainActivity.benutzer.getBenutzer_id();
