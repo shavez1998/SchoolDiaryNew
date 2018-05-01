@@ -8,15 +8,15 @@ import android.widget.Button;
 
 public class Menu extends AppCompatActivity {
 
-    Button termin,school,group;
+    Button termin,fach,logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
         termin = (Button) findViewById(R.id.termin);
-        school = (Button) findViewById(R.id.fach);
-
+        fach = (Button) findViewById(R.id.fach);
+        logout = (Button) findViewById(R.id.logout);
 
         termin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,11 +25,20 @@ public class Menu extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        school.setOnClickListener(new View.OnClickListener() {
+        fach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Menu.this, Faecher.class);
                 startActivity(i);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Menu.this, MainActivity.class);
+                i.putExtra("logout","true");
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
     }

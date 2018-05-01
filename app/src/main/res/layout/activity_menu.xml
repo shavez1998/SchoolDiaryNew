@@ -65,6 +65,16 @@
         android:text="Fächer"
         android:textSize="30sp" />
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="270sp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/fach"
+        android:layout_below="@+id/fach"
+        android:layout_marginTop="34dp"
+        android:text="Logout"
+        android:textSize="30sp" />
+
 
 
 

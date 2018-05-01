@@ -92,13 +92,11 @@ public class Termine_Edit extends AppCompatActivity {
                     json.put("datum", datumArr[2]+"-"+datumArr[1]+"-"+datumArr[0]);
                     json.put("beschreibung", beschreibung.getText().toString());
 
-                    DatenHochladen t = new DatenHochladen("terminen","editTermin");
+                    DatenHochladen t = new DatenHochladen("terminen","editTermin","terminenedit",Termine_Edit.this);
                     t.execute(new JSONObject[]{json});
-                    new Termin().terminHolenArr(false);
-                    proOff();
+
                 } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
 
-                finish();
             }
         });
 
@@ -109,5 +107,28 @@ public class Termine_Edit extends AppCompatActivity {
     }
     public void proOff(){
         dialog.dismiss();
+    }
+
+    public void datenGespeichert(){
+        new Termin().terminHolenArr(false);
+        proOff();
+        finish();
+    }
+    public void showError(){
+        proOff();
+        showMessageError("ERROR","Internet verbindungs fehler");
+    }
+    public  void showMessageError(String title, String message){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 }

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 import dmax.dialog.SpotsDialog;
 
-import static com.example.shavez.schooldiary.MainActivity.benutzer;
+
 
 public class Register extends AppCompatActivity {
 
@@ -47,6 +47,10 @@ public class Register extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
             boolean nichtAusgefuhlt = true;
+            vorname.getText().toString().trim();
+            nachname.getText().toString().trim();
+            email.getText().toString().trim();
+            email.getText().toString().toLowerCase();
             if (!vorname.getText().toString().isEmpty())
                 if (!nachname.getText().toString().isEmpty())
                     if (!email.getText().toString().isEmpty())
@@ -89,6 +93,7 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         showMessage("ERROR", "Internet verbindungs fehler");
+                        proOff();
                     }
                 });
             }
@@ -128,6 +133,7 @@ public class Register extends AppCompatActivity {
     public void proOff(){
         dialog.dismiss();
     }
+
 
 
 }

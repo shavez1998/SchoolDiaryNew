@@ -7,84 +7,67 @@
     tools:context="com.example.shavez.schooldiary.Noten_Add">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_termin_add"
+        android:id="@+id/fachToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
+
         />
 
     <TextView
-        android:id="@+id/labelTitel"
-        android:layout_below="@+id/toolbar_termin_add"
+        android:id="@+id/fachView"
+        android:layout_below="@id/fachToolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="13dp"
-        android:text="Titel von Termin"
+        android:layout_marginTop="80dp"
+        android:text="Fach Auswählen"
         android:textSize="24sp"
         android:textStyle="bold"
 
         />
 
+    <Spinner
+        android:id="@+id/fachSpinner"
+        android:layout_width="350dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="35dp"
+        android:layout_alignStart="@+id/fachView"
+        android:layout_below="@+id/fachView"
+        >
+    </Spinner>
     <EditText
-        android:id="@+id/termin_add_titel"
+        android:id="@+id/fachEdit"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/labelTitel"
-        android:layout_below="@+id/labelTitel"
+        android:layout_alignStart="@+id/fachView"
+        android:layout_below="@+id/fachView"
         android:layout_marginTop="17dp"
         android:ems="10"
-        android:hint="Titel"
+        android:hint="Fach name"
         android:inputType="textPersonName"
         android:maxLength="20"/>
 
-    <TextView
-        android:id="@+id/LabelDatum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/termin_add_titel"
-        android:layout_below="@+id/termin_add_titel"
-        android:layout_marginTop="17dp"
-        android:text="Datum"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/fachCheck"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignStart="@+id/fachEdit"
+        android:layout_below="@+id/fachEdit"
+        />
 
     <TextView
-        android:id="@+id/termin_add_datum"
+        android:id="@+id/checkView"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/LabelDatum"
-        android:layout_below="@+id/LabelDatum"
-        android:layout_marginTop="17dp"
-        android:text="Datum Auswählen"/>
-    <TextView
-        android:id="@+id/LabelBeschreibung"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/termin_add_datum"
-        android:layout_below="@+id/termin_add_datum"
-        android:layout_marginTop="17dp"
-        android:text="Beschreibung"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/termin_add_beschreibung"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/LabelBeschreibung"
-        android:layout_below="@+id/LabelBeschreibung"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="Kurze Beschreibung"
-        android:inputType="textMultiLine"
-        android:maxLines="6"/>
-
-
-
+        android:layout_alignLeft="@+id/fachCheck"
+        android:layout_below="@+id/fachCheck"
+        android:text="Klicken sie auf der Check Box um eigenes Fach einzufügen!"
+        />
 
     <Button
-        android:id="@+id/termin_add_button"
+        android:id="@+id/fachButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

@@ -8,7 +8,8 @@
         android:layout_width="60dp"
         android:layout_height="56dp"
         android:layout_margin="8dp"
-        android:background="@android:color/holo_green_light" />
+        android:background="@android:color/holo_green_light"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
     <TextView
         android:id="@+id/termin_titel"

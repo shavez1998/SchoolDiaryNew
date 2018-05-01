@@ -35,7 +35,8 @@
         <activity android:name=".Termine_Add" />
         <activity android:name=".Termine_Edit" />
         <activity android:name=".Termine_Info" />
-        <activity android:name=".Fach_Add"></activity>
+        <activity android:name=".Fach_Add" />
+        <activity android:name=".PasswordReset"></activity>
     </application>
 
 </manifest>

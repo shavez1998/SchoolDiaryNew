@@ -61,12 +61,8 @@ public class FachAdapter extends ArrayAdapter<Fach> {
             viewHolder = (ViewHolder) converView.getTag();
         }
         viewHolder.name.setText(fach.getFach_name());
-        int note_ohne_komma = (int) fach.getDurchschnittsnote();
-        if(fach.getDurchschnittsnote() >= 10.0){
-            viewHolder.dnote.setText("" + note_ohne_komma);
-        }else{
-            viewHolder.dnote.setText("" + fach.getDurchschnittsnote());
-        }
+        viewHolder.dnote.setText("" + fach.getDurchschnittsnote());
+
 
 
         if(fach.getDurchschnittsnote() < 6){
@@ -94,8 +90,6 @@ public class FachAdapter extends ArrayAdapter<Fach> {
                                     switch (item.getItemId()) {
 
                                         case R.id.delete:
-
-
                                             AlertDialog.Builder adb=new AlertDialog.Builder(context);
                                             adb.setTitle("Fach löschen");
                                             adb.setMessage("Sind Sie sicher?");
@@ -105,13 +99,13 @@ public class FachAdapter extends ArrayAdapter<Fach> {
                                                 public void onClick(DialogInterface dialog, int which) {
                                                  try {
                                                     faecher.proOn();
+                                                    faecher.itemPos = position;
                                                     JSONObject json = new JSONObject();
                                                     json.put("fachID", "" + faecher.fachAdapter.getItem(position).getFach_id());
-                                                    json.put("userID", "" + MainActivity.benutzer.getBenutzer_id());
-                                                    DatenHochladen t = new DatenHochladen("faecher","delFach");
+                                                    json.put("userID", "" + MainActivity.USERID);
+                                                    DatenHochladen t = new DatenHochladen("faecher","delFach","faecher", faecher);
                                                     t.execute(new JSONObject[]{json});
-                                                    faecher.fachAdapter.remove(faecher.fachAdapter.getItem(position));
-                                                    faecher.proOff();
+
                                                 } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
 
                                                 }});

@@ -137,13 +137,9 @@ public class Noten_Edit extends AppCompatActivity {
                     json.put("datum", datumArr[2]+"-"+datumArr[1]+"-"+datumArr[0]);
                     json.put("note", note.getText().toString());
 
-                    DatenHochladen t = new DatenHochladen("noten","editNote");
+                    DatenHochladen t = new DatenHochladen("noten","editNote","notenedit",Noten_Edit.this);
                     t.execute(new JSONObject[]{json});
-                    new Bewertung().notenHolenArr("" + fach_id,true);
-                    proOff();
                 } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
-
-                finish();
             }
         });
 
@@ -154,5 +150,27 @@ public class Noten_Edit extends AppCompatActivity {
     }
     public void proOff(){
         dialog.dismiss();
+    }
+    public void datenGespeichert(){
+        new Bewertung().notenHolenArr("" + fach_id,false);
+        proOff();
+        finish();
+    }
+    public void showError(){
+        proOff();
+        showMessageError("ERROR","Internet verbindungs fehler");
+    }
+    public  void showMessageError(String title, String message){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 }

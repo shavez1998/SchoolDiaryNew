@@ -110,12 +110,12 @@ public class NotenAdapter extends ArrayAdapter<Bewertung> {
 
                                                 try {
                                                     noten.proOn();
+                                                    noten.itemPos = position;
                                                     JSONObject json = new JSONObject();
                                                     json.put("id", "" + noten.notenAdapter.getItem(position).getBewertung_id());
-                                                    DatenHochladen t = new DatenHochladen("noten", "deleteNote");
+                                                    DatenHochladen t = new DatenHochladen("noten", "deleteNote","noten",noten);
                                                     t.execute(new JSONObject[]{json});
-                                                    noten.notenAdapter.remove(noten.notenAdapter.getItem(position));
-                                                    noten.proOff();
+
                                                 } catch (Exception e) {
 
                                                 }

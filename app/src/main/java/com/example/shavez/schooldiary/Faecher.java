@@ -37,7 +37,7 @@ public class Faecher extends AppCompatActivity {
     public FachAdapter fachAdapter;
     public static  ArrayList<Fach> fachArr = new ArrayList<>();
     public static Faecher faecher;
-
+    public int itemPos;
     Toolbar toolbar;
     MaterialSearchView searchView;
     PullRefreshLayout refreshLayout;
@@ -51,10 +51,9 @@ public class Faecher extends AppCompatActivity {
         faecher = this;
         fachAdapter = new FachAdapter(this, fachArr, this);
         listView.setAdapter(fachAdapter);
-        proOn();
+
         Fach fach= new Fach();
-        new Fach().faecherHolenArr();
-        proOff();
+        new Fach().faecherHolenArr(true);
         //fachArr = Fach.faecherLaden();
         listViewLaden(fachArr);
         toolbar = (Toolbar) findViewById(R.id.toolbar_fach);
@@ -109,48 +108,18 @@ public class Faecher extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 Toast.makeText(getApplicationContext(),"REFRESH GO",Toast.LENGTH_SHORT).show();
-                new Fach().faecherHolenArr();
-                refreshLayout.setRefreshing(false);
+                new Fach().faecherHolenArr(false);
+
 
             }
         });
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Fach Hinzufügen");
-        builder.setMessage("Fachname eingeben!");
 
-        fachname = new EditText(this);
-        builder.setView(fachname);
-
-        builder.setPositiveButton("Hinzufügen", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                String txt = fachname.getText().toString();
-                try {
-                    proOn();
-                    JSONObject json = new JSONObject();
-                    json.put("fachname", txt);
-                    json.put("uid", MainActivity.benutzer.getBenutzer_id());
-                    DatenHochladen t = new DatenHochladen("faecher","addFach");
-                    t.execute(new JSONObject[]{json});
-                    proOff();
-
-                    Toast.makeText(getApplicationContext(),txt,Toast.LENGTH_SHORT).show();
-                } catch (Exception e){ }
-            }
-        });
-        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getApplicationContext(),"Abbrechen",Toast.LENGTH_SHORT).show();
-                dialogInterface.dismiss();
-            }
-        });
-        final AlertDialog ad = builder.create();
         addFach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ad.show();
+                Intent i = new Intent(Faecher.this, Fach_Add.class);
+                startActivity(i);
             }
         });
 
@@ -191,5 +160,41 @@ public class Faecher extends AppCompatActivity {
     }
     public void proOff(){
         dialog.dismiss();
+    }
+
+
+    public void datenGespeichert(){
+        fachAdapter.remove(faecher.fachAdapter.getItem(itemPos));
+        proOff();
+    }
+    public void showError(){
+        proOff();
+        showMessageError("ERROR","Internet verbindungs fehler");
+    }
+    public  void showMessage(String title, String message){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("Neuladen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new Fach().faecherHolenArr(true);
+            }
+        });
+        builder.show();
+    }
+    public  void showMessageError(String title, String message){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 }

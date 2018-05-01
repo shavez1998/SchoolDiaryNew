@@ -1,7 +1,10 @@
 package com.example.shavez.schooldiary;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -21,28 +26,67 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import dmax.dialog.SpotsDialog;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    public static Benutzer benutzer;
-    android.app.AlertDialog dialog;
+    public static int USERID;
+    public android.app.AlertDialog dialog;
+    CheckBox checkBox ;
     Button login;
     Button register;
     EditText emailText;
     EditText passwortText;
+    TextView passForgot;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+    private boolean activeUserLog = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        benutzer = new Benutzer();
-
         login = (Button) findViewById(R.id.login);
         register = (Button) findViewById(R.id.register);
         emailText = (EditText) findViewById(R.id.email);
         passwortText = (EditText) findViewById(R.id.passwort);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
+        passForgot = (TextView) findViewById(R.id.passForgot);
+
+        passForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, PasswordReset.class);
+                startActivity(i);
+            }
+        });
+        prefs = this.getApplicationContext().getSharedPreferences("userdetails", Context.MODE_PRIVATE);
+        editor = prefs.edit();
+        try {
+            Intent i = getIntent();
+            String logout = i.getStringExtra("logout");
+            if(logout.equals("true")){
+                editor.clear();
+                editor.commit();
+                Log.e("HELP ME ","SHAVEZ");
+            }
+        }catch (Exception e){
+
+        }
+
+
+        String benutzerID = prefs.getString("UserID", "");
+        if(!benutzerID.equalsIgnoreCase("")) {
+            USERID = Integer.parseInt(prefs.getString("UserID", ""));
+            Intent i = new Intent(MainActivity.this, Menu.class);
+            startActivity(i);
+        }
+
+
+
+
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean nichtAusgefuhlt = true;
+                emailText.getText().toString().trim();
+                emailText.getText().toString().toLowerCase();
                 if(!emailText.getText().toString().isEmpty())
                     if(!passwortText.getText().toString().isEmpty())
                                 nichtAusgefuhlt = false;
@@ -78,23 +124,20 @@ public class MainActivity extends AppCompatActivity {
                                     arr = response.getJSONArray("daten");
                                     JSONObject data = arr.getJSONObject(0);
                                     if(data.has("id")){
-                                        int id = Integer.parseInt(data.getString("id"));
-                                        benutzer.setBenutzer_id(id);
-                                    }
-                                    if(data.has("vorname")){
-                                        benutzer.setVorname(data.getString("vorname"));
-                                    }
-                                    if(data.has("nachname")){
-                                        benutzer.setNachname(data.getString("nachname"));
-                                    }
-                                    if(data.has("email")){
-                                        benutzer.setEmail(data.getString("email"));
+                                        USERID = Integer.parseInt(data.getString("id"));
+                                        if(checkBox.isChecked()) {
+                                            editor.putString("UserID", "" + USERID);
+                                            editor.apply();
+                                        }
                                     }
 
+
                                     if(data.has("error")){
+                                        proOff();
                                         showMessage("ERROR","Email oder Passwort falsch!!");
                                         passwortText.setText("");
                                         login = false;
+
                                     }
                                 }
                                 if(login) {
@@ -111,6 +154,11 @@ public class MainActivity extends AppCompatActivity {
                                // Log.e("LIST LEN", ""+ Fach.list.size());
                             }
                         }
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                            showMessage("ERROR", "Internet verbindungs fehler");
+                            proOff();
+                        }
                     });
 
                 }
@@ -118,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public  void showMessage(String title, String message){
+    public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);
@@ -135,10 +183,11 @@ public class MainActivity extends AppCompatActivity {
         dialog = new SpotsDialog(this, "Loading");
         dialog.show();
     }
-    public void proOff(){  dialog.dismiss(); }
+    public  void proOff(){  dialog.dismiss(); }
 
-    public void FachArrFuellen(){
-
+    @Override
+    public void onBackPressed() {
+        return;
     }
 
 

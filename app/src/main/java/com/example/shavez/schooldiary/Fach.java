@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -99,11 +100,10 @@ public class Fach {
                 fach.setFach_id(Integer.parseInt(object.getString("id")));
             }
             if(object.has("dnote")){
-                float dnote = Float.parseFloat(object.getString("dnote"));
-
-                Log.w("Dnote", ""+dnote);
-                //float dnote1 = Math.round(4.5 * 100)/ 100);;
-                fach.setDurchschnittsnote(Float.parseFloat(""+Math.round(dnote * 10.0)/ 10.0));
+                float dnote = Float.parseFloat(object.getString("dnote")) * 100;
+                int i = (int) dnote ;
+                dnote = (float) i / 100;
+                fach.setDurchschnittsnote(dnote);
             }
         }catch (Exception e){
 
@@ -111,12 +111,13 @@ public class Fach {
         return fach;
     }
 
-    public void faecherHolenArr(){
+    public void faecherHolenArr(final Boolean loadDialog){
 
-        //Faecher.faecher.proOn();
+        if(loadDialog)
+            Faecher.faecher.proOn();
         final ArrayList<Fach> list = new ArrayList<Fach>();
         Client client = new Client();
-        String url = "f=getFach&uid="+MainActivity.benutzer.getBenutzer_id();
+        String url = "f=getFach&uid="+MainActivity.USERID;
         //start
         client.getDaten("faecher",url, new JsonHttpResponseHandler(){
             @Override
@@ -132,10 +133,18 @@ public class Fach {
                     }
                     Faecher.faecher.fachArr = list;
                     Faecher.faecher.serArrList();
-                    Faecher.faecher.proOff();
-                    //end
-                   // dialog.dismiss();
+                    if(loadDialog)
+                        Faecher.faecher.proOff();
+                    Faecher.faecher.refreshLayout.setRefreshing(false);
+
                 } catch (Exception e){ }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Faecher.faecher.proOff();
+                Faecher.faecher.refreshLayout.setRefreshing(false);
+                Faecher.faecher.showMessage("ERROR", "Internet verbindungs fehler");
+
             }
         });
         //return list;

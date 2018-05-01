@@ -1,6 +1,7 @@
 package com.example.shavez.schooldiary;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -41,7 +42,7 @@ public class Terminen extends AppCompatActivity {
     MaterialSearchView searchView;
     PullRefreshLayout refreshLayout;
     Button save;
-
+    public  int itemPos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,5 +161,40 @@ public class Terminen extends AppCompatActivity {
     }
     public void proOff(){
         dialog.dismiss();
+    }
+
+    public void datenGespeichert(){
+        terminAdapter.remove(terminen.terminAdapter.getItem(itemPos));
+        proOff();
+    }
+    public void showError(){
+        proOff();
+        showMessageError("ERROR","Internet verbindungs fehler");
+    }
+    public void showMessage(String title, String message){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("Neuladen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new Termin().terminHolenArr(true);
+            }
+        });
+        builder.show();
+    }
+    public  void showMessageError(String title, String message){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 }

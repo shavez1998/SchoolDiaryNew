@@ -51,7 +51,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
 
-        android:text="Fach Hinzufügen"
+        android:text="Termin Hinzufügen"
         android:textAllCaps="false"
         android:textSize="24sp" />
 

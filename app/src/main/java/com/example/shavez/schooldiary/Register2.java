@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import dmax.dialog.SpotsDialog;
 
 public class Register2 extends AppCompatActivity {
@@ -82,7 +84,7 @@ public class Register2 extends AppCompatActivity {
                         nichtAusgefuhlt = false;
 
                 if (nichtAusgefuhlt) {
-                    showMessage("ERROR", "Bitte alle Feldern Ausfühlen");
+                    showMessage1("ERROR", "Bitte alle Feldern Ausfühlen");
                 } else {
                     try {
                         proOn();
@@ -95,15 +97,13 @@ public class Register2 extends AppCompatActivity {
                         json.put("passwort", passwort);
                         json.put("frage2", auswahl2);
                         json.put("antwort2", antwort2.getText().toString());
-                        DatenHochladen t = new DatenHochladen("registerReceive","json");
+                        DatenHochladen t = new DatenHochladen("registerReceive","json","reg2",Register2.this);
                         t.execute(new JSONObject[]{json});
-                        proOff();
-                    } catch (Exception e) {
 
+                    } catch (Exception e) {
+                        Log.w("JSONERROR", "QWEQW");
                     }
 
-                    Intent i = new Intent(Register2.this, MainActivity.class);
-                    startActivity(i);
                 }
             }
         });
@@ -114,6 +114,7 @@ public class Register2 extends AppCompatActivity {
         passwort = i.getStringExtra("passwort");
         getFragen();
     }
+
 
     public void getFragen(){
         proOn();
@@ -149,9 +150,37 @@ public class Register2 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
                 }
             }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                proOff();
+                showMessage("ERROR", "Internet verbindungs fehler");
+            }
         });
     }
+
+    public void datenGespeichert(){
+        proOff();
+        Intent i = new Intent(Register2.this, MainActivity.class);
+        startActivity(i);
+    }
+    public void showError(){
+        proOff();
+        showMessage1("ERROR","Internet verbindungs fehler");
+    }
     public  void showMessage(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.show();
+    }
+    public  void showMessage1(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);

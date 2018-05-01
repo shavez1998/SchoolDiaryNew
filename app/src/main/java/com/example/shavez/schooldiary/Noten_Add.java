@@ -43,6 +43,7 @@ public class Noten_Add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noten__add);
+
         Toolbar toolbarVerify = (Toolbar) findViewById(R.id.toolbar_noten_add);
         toolbarVerify.setTitle("Note Hinzufügen");
         toolbarVerify.setTitleTextColor(Color.WHITE);
@@ -133,17 +134,17 @@ public class Noten_Add extends AppCompatActivity {
                     String[] datumArr = datum.getText().toString().split("\\.");
                     JSONObject json = new JSONObject();
                     json.put("fachID", "" + fach_id);
-                    json.put("userID", "" + MainActivity.benutzer.getBenutzer_id());
+                    json.put("userID", "" + MainActivity.USERID);
                     json.put("beschreibung", titel.getText().toString());
                     json.put("datum", datumArr[2]+"-"+datumArr[1]+"-"+datumArr[0]);
                     json.put("note", note.getText().toString());
 
-                    DatenHochladen t = new DatenHochladen("noten","addNote");
+                    DatenHochladen t = new DatenHochladen("noten","addNote","notenadd",Noten_Add.this);
                     t.execute(new JSONObject[]{json});
-                    proOff();
+
                 } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
-                new Bewertung().notenHolenArr("" + fach_id,true);
-                finish();
+
+
             }
         });
 
@@ -156,5 +157,29 @@ public class Noten_Add extends AppCompatActivity {
     }
     public void proOff(){
         dialog.dismiss();
+    }
+
+    public void datenGespeichert(){
+
+        new Bewertung().notenHolenArr("" + fach_id,false);
+        proOff();
+        finish();
+    }
+    public void showError(){
+        proOff();
+        showMessageError("ERROR","Internet verbindungs fehler");
+    }
+    public  void showMessageError(String title, String message){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 }

@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
+import cz.msebera.android.httpclient.Header;
+
 /**
  * Created by ateeq on 02/03/2018.
  */
@@ -90,7 +92,7 @@ public class Termin {
             Terminen.terminen.proOn();
         final ArrayList<Termin> list = new ArrayList<Termin>();
         Client client = new Client();
-        String url = "f=getTerminen&uid="+MainActivity.benutzer.getBenutzer_id();
+        String url = "f=getTerminen&uid="+MainActivity.USERID;
         client.getDaten("terminen",url, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
@@ -108,6 +110,12 @@ public class Termin {
                     if(loadLabel)
                         Terminen.terminen.proOff();
                 } catch (Exception e){ }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Terminen.terminen.proOff();
+                Terminen.terminen.showMessage("ERROR", "Internet verbindungs fehler");
+
             }
         });
     }

@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
+import cz.msebera.android.httpclient.Header;
+
 /**
  * Created by ateeq on 02/03/2018.
  */
@@ -108,7 +110,7 @@ public class Bewertung {
             Noten.noten.proOn();
         final ArrayList<Bewertung> list = new ArrayList<Bewertung>();
         Client client = new Client();
-        String url = "f=getNoten&uid="+MainActivity.benutzer.getBenutzer_id()+"&fid="+fach_id;
+        String url = "f=getNoten&uid="+MainActivity.USERID+"&fid="+fach_id;
         client.getDaten("noten",url, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int stausCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response){
@@ -126,6 +128,12 @@ public class Bewertung {
                     if(loadDialog)
                         Noten.noten.proOff();
                 } catch (Exception e){ }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Faecher.faecher.proOff();
+                Noten.noten.showMessage("ERROR", "Internet verbindungs fehler");
+
             }
         });
         //return list;

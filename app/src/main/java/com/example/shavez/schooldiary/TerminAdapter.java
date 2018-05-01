@@ -103,10 +103,9 @@ public class TerminAdapter extends ArrayAdapter<Termin> {
                                                     terminen.proOn();
                                                     JSONObject json = new JSONObject();
                                                     json.put("id", "" + terminen.terminAdapter.getItem(position).getTermin_id());
-                                                    DatenHochladen t = new DatenHochladen("terminen","delTermin");
+                                                    DatenHochladen t = new DatenHochladen("terminen","delTermin","terminen",terminen);
                                                     t.execute(new JSONObject[]{json});
-                                                    terminen.terminAdapter.remove(terminen.terminAdapter.getItem(position));
-                                                    terminen.proOff();
+
                                                 } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
 
                                             }});
