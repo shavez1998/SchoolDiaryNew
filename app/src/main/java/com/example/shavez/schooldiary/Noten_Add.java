@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -42,7 +43,9 @@ public class Noten_Add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noten__add);
-
+        Toolbar toolbarVerify = (Toolbar) findViewById(R.id.toolbar_noten_add);
+        toolbarVerify.setTitle("Note Hinzufügen");
+        toolbarVerify.setTitleTextColor(Color.WHITE);
         Intent intent = getIntent();
         fach_id = Integer.parseInt(intent.getStringExtra("fach_id"));
 
@@ -139,7 +142,7 @@ public class Noten_Add extends AppCompatActivity {
                     t.execute(new JSONObject[]{json});
                     proOff();
                 } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
-                new Bewertung().notenHolenArr("" + fach_id);
+                new Bewertung().notenHolenArr("" + fach_id,true);
                 finish();
             }
         });

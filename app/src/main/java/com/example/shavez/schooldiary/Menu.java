@@ -15,8 +15,7 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         termin = (Button) findViewById(R.id.termin);
-        school = (Button) findViewById(R.id.school);
-        group = (Button) findViewById(R.id.group);
+        school = (Button) findViewById(R.id.fach);
 
 
         termin.setOnClickListener(new View.OnClickListener() {
@@ -33,13 +32,10 @@ public class Menu extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        group.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent i = new Intent(Menu.this, Group.class);
-                //startActivity(i);
-            }
-        });
+    }
+    @Override
+    public void onBackPressed() {
+        return;
     }
 }
 

@@ -83,14 +83,12 @@ public class TerminAdapter extends ArrayAdapter<Termin> {
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()) {
                                     case R.id.edit:
-
-                                        /*Intent i = new Intent(noten.getApplicationContext(),Noten_Edit.class);
-                                        i.putExtra("id", position);
-                                        i.putExtra("titel", noten.notenAdapter.getItem(position).getBewertung_titel());
-                                        i.putExtra("datum", noten.notenAdapter.getItem(position).getBewertung_datum());
-                                        i.putExtra("note", noten.notenAdapter.getItem(position).getNote()+"");
+                                        Intent i = new Intent(terminen.getApplicationContext(),Termine_Edit.class);
+                                        i.putExtra("termin_id", "" + terminen.terminAdapter.getItem(position).getTermin_id());
+                                        i.putExtra("titel", terminen.terminAdapter.getItem(position).getTermin_titel());
+                                        i.putExtra("datum", terminen.terminAdapter.getItem(position).getTermin_datum());
+                                        i.putExtra("beschreibung", terminen.terminAdapter.getItem(position).getTermin_beschreibung());
                                         startActivity(context, i, null);
-                                        Toast.makeText(context, "Edit " + " : " + position, Toast.LENGTH_LONG).show();*/
                                         break;
 
                                     case R.id.delete:
@@ -104,8 +102,7 @@ public class TerminAdapter extends ArrayAdapter<Termin> {
                                                 try {
                                                     terminen.proOn();
                                                     JSONObject json = new JSONObject();
-                                                    json.put("fachID", "" + terminen.terminAdapter.getItem(position).getTermin_id());
-                                                    json.put("userID", "" + MainActivity.benutzer.getBenutzer_id());
+                                                    json.put("id", "" + terminen.terminAdapter.getItem(position).getTermin_id());
                                                     DatenHochladen t = new DatenHochladen("terminen","delTermin");
                                                     t.execute(new JSONObject[]{json});
                                                     terminen.terminAdapter.remove(terminen.terminAdapter.getItem(position));

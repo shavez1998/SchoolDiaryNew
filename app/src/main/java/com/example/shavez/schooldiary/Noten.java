@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class Noten extends AppCompatActivity {
     AlertDialog dialog;
     Toolbar toolbar;
     MaterialSearchView searchView;
+    PullRefreshLayout refreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class Noten extends AppCompatActivity {
         notenAdapter = new NotenAdapter(this, bw, this);
         listView.setAdapter(notenAdapter);
         Bewertung b = new Bewertung();
-        b.notenHolenArr(fach_id);
+        b.notenHolenArr(fach_id,true);
 
         addNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +106,17 @@ public class Noten extends AppCompatActivity {
                     listViewLaden(notenArr);
                 }
                 return  true;
+            }
+        });
+
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getApplicationContext(),"REFRESH GO",Toast.LENGTH_SHORT).show();
+                new Bewertung().notenHolenArr(fach_id,false);
+                refreshLayout.setRefreshing(false);
+
             }
         });
 

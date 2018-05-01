@@ -29,20 +29,29 @@
         android:textColorHint="#FFFFFF"
         />
 
-    <ListView
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_height="470sp"
         android:layout_width="match_parent"
-        android:layout_height="470dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar_noten"
-        android:id="@+id/lvNote"
-        android:divider="#FFFFFF"
-        android:dividerHeight="5dp"/>
+        android:layout_below="@+id/toolbar_noten">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="470dp"
+            android:layout_alignParentStart="true"
+            android:id="@+id/lvNote"
+            android:divider="#FFFFFF"
+            android:dividerHeight="5dp"/>
+
+
+
+    </com.baoyz.widget.PullRefreshLayout>
 
     <Button
         android:id="@+id/addNote"
         android:layout_width="230sp"
         android:layout_height="50dp"
-        android:layout_below="@+id/lvNote"
+        android:layout_below="@id/swipeRefreshLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
 

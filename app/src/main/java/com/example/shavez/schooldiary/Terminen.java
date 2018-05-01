@@ -28,6 +28,8 @@ import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
 
+import static android.support.v4.content.ContextCompat.startActivity;
+
 public class Terminen extends AppCompatActivity {
 
     public ListView listView;
@@ -38,6 +40,7 @@ public class Terminen extends AppCompatActivity {
     Toolbar toolbar;
     MaterialSearchView searchView;
     PullRefreshLayout refreshLayout;
+    Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class Terminen extends AppCompatActivity {
         setTitle("Terminen");
         terminen = this;
         listView = (ListView) findViewById(R.id.lvTermin);
+        save = (Button) findViewById(R.id.addTermin);
         ArrayList<Termin> t = new ArrayList<>();
         terminAdapter = new TerminAdapter(this, t, this);
         listView.setAdapter(terminAdapter);
@@ -106,6 +110,26 @@ public class Terminen extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"REFRESH GO",Toast.LENGTH_SHORT).show();
                 new Termin().terminHolenArr(false);
                 refreshLayout.setRefreshing(false);
+
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(Terminen.this, Termine_Add.class);
+                startActivity(i);
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent i = new Intent(Terminen.this,Termine_Info.class);
+                i.putExtra("titel", terminAdapter.getItem(position).getTermin_titel());
+                i.putExtra("datum", terminAdapter.getItem(position).getTermin_datum());
+                i.putExtra("beschreibung", terminAdapter.getItem(position).getTermin_beschreibung());
+                startActivity(i);
 
             }
         });

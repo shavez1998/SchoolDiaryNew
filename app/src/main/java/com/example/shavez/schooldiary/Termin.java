@@ -73,7 +73,8 @@ public class Termin {
                 termin.setTermin_id(Integer.parseInt(object.getString("id")));
             }
             if(object.has("datum")){
-                termin.setTermin_datum(object.getString("datum"));
+                String[] datumArr = object.getString("datum").split("-");
+                termin.setTermin_datum(datumArr[2]+"."+datumArr[1]+"."+datumArr[0]);
             }
             if(object.has("titel")){
                 termin.setTermin_titel(object.getString("titel"));

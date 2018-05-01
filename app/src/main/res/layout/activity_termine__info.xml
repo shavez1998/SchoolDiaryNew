@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shavez.schooldiary.Noten_Add">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_termin_info"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/labelTitel"
+        android:layout_below="@+id/toolbar_termin_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="13dp"
+        android:text="Titel von Termin"
+        android:textSize="24sp"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:id="@+id/termin_info_titel"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/labelTitel"
+        android:layout_below="@+id/labelTitel"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="Titel"
+        android:inputType="textPersonName"
+        android:maxLength="20"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/LabelDatum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/termin_info_titel"
+        android:layout_below="@+id/termin_info_titel"
+        android:layout_marginTop="17dp"
+        android:text="Datum"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/termin_info_datum"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/LabelDatum"
+        android:layout_below="@+id/LabelDatum"
+        android:layout_marginTop="17dp"
+        android:text="Datum Auswählen"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/LabelBeschreibung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/termin_info_datum"
+        android:layout_below="@+id/termin_info_datum"
+        android:layout_marginTop="17dp"
+        android:text="Beschreibung"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/termin_info_beschreibung"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/LabelBeschreibung"
+        android:layout_below="@+id/LabelBeschreibung"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="Kurze Beschreibung"
+        android:inputType="textMultiLine"
+        android:maxLines="6"
+        android:textSize="18sp"/>
+
+
+
+
+    <Button
+        android:id="@+id/termin_info_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:text="OK"
+        android:textSize="24sp" />
+
+
+</RelativeLayout>

@@ -48,32 +48,24 @@
 
     <Button
         android:id="@+id/termin"
-        android:layout_width="wrap_content"
+        android:layout_width="270sp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:text="Termin"
+        android:text="Termine"
         android:textSize="30sp"
         android:layout_centerHorizontal="true"/>
 
     <Button
-        android:id="@+id/school"
-        android:layout_width="wrap_content"
+        android:id="@+id/fach"
+        android:layout_width="270sp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/termin"
         android:layout_below="@+id/termin"
         android:layout_marginTop="34dp"
-        android:text="Fach"
+        android:text="Fächer"
         android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/school"
-        android:layout_below="@+id/school"
-        android:layout_marginTop="34dp"
-        android:text="Group"
-        android:textSize="30sp" />
+
 
 
 

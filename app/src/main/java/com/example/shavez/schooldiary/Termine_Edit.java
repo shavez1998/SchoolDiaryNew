@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,14 +22,11 @@ import java.util.Calendar;
 
 import dmax.dialog.SpotsDialog;
 
-import static android.support.v4.content.ContextCompat.startActivity;
+public class Termine_Edit extends AppCompatActivity {
 
-public class Noten_Edit extends AppCompatActivity {
-
-    EditText titel;
-    TextView datum,note;
-    int note_id;
-    int fach_id;
+    EditText titel,beschreibung;
+    TextView datum;
+    int termin_id;
     Button save;
     AlertDialog dialog;
     DatePickerDialog.OnDateSetListener mDateListner;
@@ -38,21 +34,21 @@ public class Noten_Edit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_noten__edit);
-        Toolbar toolbarVerify = (Toolbar) findViewById(R.id.toolbar_noten_edit);
-        toolbarVerify.setTitle("Note Ändern");
+        setContentView(R.layout.activity_termine__edit);
+        Toolbar toolbarVerify = (Toolbar) findViewById(R.id.toolbar_termin_edit);
+        toolbarVerify.setTitle("Termin Ändern");
         toolbarVerify.setTitleTextColor(Color.WHITE);
-        titel = (EditText) findViewById(R.id.note_edit_titel);
-        datum = (TextView) findViewById(R.id.note_edit_datum);
-        note = (TextView) findViewById(R.id.note_edit_note);
-        save = (Button) findViewById(R.id.note_edit_button);
+
+        titel = (EditText) findViewById(R.id.termin_edit_titel);
+        datum = (TextView) findViewById(R.id.termin_edit_datum);
+        beschreibung = (EditText) findViewById(R.id.termin_edit_beschreibung);
+        save = (Button) findViewById(R.id.termin_edit_button);
 
         Intent intent = getIntent();
         titel.setText(intent.getStringExtra("titel"));
         datum.setText(intent.getStringExtra("datum"));
-        note.setText(intent.getStringExtra("note"));
-        note_id = Integer.parseInt(intent.getStringExtra("note_id"));
-        fach_id = Integer.parseInt(intent.getStringExtra("fach_id"));
+        beschreibung.setText(intent.getStringExtra("beschreibung"));
+        termin_id = Integer.parseInt(intent.getStringExtra("termin_id"));
 
         String help = datum.getText().toString();
 
@@ -68,7 +64,7 @@ public class Noten_Edit extends AppCompatActivity {
                 int month = Integer.parseInt(datumArr[1])-1;
                 int day = Integer.parseInt(datumArr[0]);
                 DatePickerDialog dialog = new DatePickerDialog(
-                        Noten_Edit.this,
+                        Termine_Edit.this,
                         R.style.Theme_AppCompat_Light_Dialog_MinWidth,
                         mDateListner,
                         year,month,day);
@@ -83,48 +79,7 @@ public class Noten_Edit extends AppCompatActivity {
                 datum.setText(day+"."+month+"."+year);
             }
         };
-        note.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final NumberPicker numberPicker = new NumberPicker(Noten_Edit.this);
 
-                numberPicker.setMinValue(0);
-                numberPicker.setMaxValue(24);
-                numberPicker.setWrapSelectorWheel(false);
-                zahlen = new String[25];
-                float zahl = 4;
-                int value = 0;
-                for(int i = 0; i < 25; i++){
-                    zahlen[i] = ""+ zahl;
-                    if (zahl == Float.parseFloat(note.getText().toString()))
-                        value = i;
-                    zahl += 0.25;
-                }
-                numberPicker.setValue(value);
-                numberPicker.setDisplayedValues( zahlen );
-                AlertDialog.Builder builder = new AlertDialog.Builder(Noten_Edit.this);
-                builder.setTitle("Note Auswählen");
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        note.setText(zahlen[numberPicker.getValue()]);
-                    }
-                });
-
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                builder.setView(numberPicker);
-                builder.create();
-                builder.show();
-            }
-
-        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,14 +87,14 @@ public class Noten_Edit extends AppCompatActivity {
                     proOn();
                     String[] datumArr = datum.getText().toString().split("\\.");
                     JSONObject json = new JSONObject();
-                    json.put("id", "" + note_id);
-                    json.put("beschreibung", titel.getText().toString());
+                    json.put("id", "" + termin_id);
+                    json.put("titel", titel.getText().toString());
                     json.put("datum", datumArr[2]+"-"+datumArr[1]+"-"+datumArr[0]);
-                    json.put("note", note.getText().toString());
+                    json.put("beschreibung", beschreibung.getText().toString());
 
-                    DatenHochladen t = new DatenHochladen("noten","editNote");
+                    DatenHochladen t = new DatenHochladen("terminen","editTermin");
                     t.execute(new JSONObject[]{json});
-                    new Bewertung().notenHolenArr("" + fach_id,true);
+                    new Termin().terminHolenArr(false);
                     proOff();
                 } catch (Exception e){ Log.w("DELETE ERROR", "asdf"); e.getMessage();}
 

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import dmax.dialog.SpotsDialog;
 
 import static com.example.shavez.schooldiary.MainActivity.benutzer;
@@ -83,6 +85,10 @@ public class Register extends AppCompatActivity {
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
                         }
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        showMessage("ERROR", "Internet verbindungs fehler");
                     }
                 });
             }

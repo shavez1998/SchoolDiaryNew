@@ -31,7 +31,11 @@
         <activity android:name=".Noten_Edit" />
         <activity android:name=".Terminen" />
         <activity android:name=".Processbar" />
-        <activity android:name=".Noten_Add"></activity>
+        <activity android:name=".Noten_Add" />
+        <activity android:name=".Termine_Add" />
+        <activity android:name=".Termine_Edit" />
+        <activity android:name=".Termine_Info" />
+        <activity android:name=".Fach_Add"></activity>
     </application>
 
 </manifest>

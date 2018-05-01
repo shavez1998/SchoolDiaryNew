@@ -40,7 +40,10 @@ public class DatenHochladen extends AsyncTask<JSONObject, JSONObject, JSONObject
             String resFromServer = org.apache.http.util.EntityUtils.toString(response.getEntity());
             r = resFromServer;
             Log.w("JSONRES", r);
-        } catch (Exception e) {Log.w("JSON1", r); e.printStackTrace();}
+        } catch (Exception e) {
+            Log.w("JSON1", r);
+            e.printStackTrace();
+        }
 
         return jsonResponse;
     }
